@@ -1,0 +1,30 @@
+
+function piResponse() {
+		piSetCookie('visitor_id346981', '699670189', 3650);
+			piSetCookie('visitor_id346981-hash', '31227f3c542fc05246397f406f3519589fe4f06d9ca0c80ba759e43767e8b50d6efa3f017d27f7191952adfa9d04c9556bb7117d', 3650);
+		
+		if (document.location.protocol != "https:" || (document.location.protocol == "https:" && true)) {
+		var analytics_link = document.location.protocol + "//" + "info.nihonkiin.or.jp/analytics?";
+		pi.tracker.visitor_id='699670189';
+
+				pi.tracker.visitor_id_sign='31227f3c542fc05246397f406f3519589fe4f06d9ca0c80ba759e43767e8b50d6efa3f017d27f7191952adfa9d04c9556bb7117d';
+		
+				pi.tracker.campaign_id='1277';
+		
+		var variables = 'conly=true';
+		for (property in pi.tracker) {
+					variables += "&" + property + "=" + encodeURIComponent(pi.tracker[property]);
+				}
+		var headID = document.getElementsByTagName("head")[0];
+		piScriptObj[piScriptNum] = document.createElement('script');
+		piScriptObj[piScriptNum].type = 'text/javascript';
+		piScriptObj[piScriptNum].src = analytics_link + variables;
+		headID.appendChild(piScriptObj[piScriptNum]);
+		piScriptObj[piScriptNum].onload = function() { return; }
+	}
+	}
+piResponse();
+
+
+
+

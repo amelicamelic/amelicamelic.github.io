@@ -1,0 +1,1811 @@
+//--------------------------------------------------
+// httpとhttpsを切り替える
+/*
+$(function() {
+	if(location.href.indexOf("https://") !== -1) {
+		$('a').each(function() {
+			if(
+				$(this).attr("href").indexOf("toiawase") === -1 &&
+				$(this).attr("href").indexOf("member/login") === -1 &&
+				$(this).attr("href").indexOf("member/setting") === -1
+			) {
+				var strUrls = $(this).attr("href").split("/");
+				if(strUrls[0] == "") {
+					$(this).attr("href",$(this).attr("href").replace(/^\//,"http://"+location.host+"/"));
+				}else{
+					if($(this).attr("href").indexOf(location.host) !== -1) {
+						$(this).attr("href",$(this).attr("href").replace("https://"+location.host,""));
+					}
+				}
+			}
+		});
+	}else{
+		$('a').each(function() {
+			if($(this).attr('href') != undefined) {
+				if(
+					!($(this).attr("href").indexOf("toiawase") === -1 &&
+					$(this).attr("href").indexOf("member/login") === -1 &&
+					$(this).attr("href").indexOf("member/setting") === -1)
+				) {
+					var strUrls = $(this).attr("href").split("/");
+					if(strUrls[0] == "") {
+						$(this).attr("href",$(this).attr("href").replace(/^\//,"https://"+location.host+"/"));
+					}else{
+						if($(this).attr("href").indexOf(location.host) !== -1) {
+							$(this).attr("href",$(this).attr("href").replace("http://"+location.host,"https://"+location.host));
+						}
+					}
+				}
+			}
+		});
+	}
+});
+*/
+
+
+//ブラウザのチェック
+function check_browser(){
+	var userAgent = window.navigator.userAgent.toLowerCase();
+	var appVersion = window.navigator.appVersion.toLowerCase();
+	browser = '';
+	//alert(this.userAgent);
+	if(userAgent.indexOf('opera') != -1){
+		browser = 'opera';
+	}else if (userAgent.indexOf('msie') != -1){
+		browser = 'ie';
+		
+		if(appVersion.indexOf("msie 6.") != -1){
+			browser = 'ie6';
+		}else if(appVersion.indexOf("msie 7.") != -1){
+			browser = 'ie7';
+		}else if(appVersion.indexOf("msie 8.") != -1){
+			browser = 'ie8';
+		}else if(appVersion.indexOf("msie 9.") != -1){
+			browser = 'ie9';
+		}
+		
+	}else if(userAgent.indexOf('chrome') != -1){
+		if(userAgent.indexOf('android') != -1){
+			browser = 'android';
+			return "smp";
+		}else{
+			browser = 'chrome';
+		}
+	}else if(userAgent.indexOf('safari') != -1){
+		if(userAgent.indexOf('iphone') != -1){
+			browser = 'iphone';
+			return "smp";
+		}else if(userAgent.indexOf('ipad') != -1){
+			browser = 'ipad';
+			return "smp";
+		}else if(userAgent.indexOf('ipod') != -1){
+			browser = 'ipod';
+			return "smp";
+		}else if(userAgent.indexOf('android') != -1){
+			browser = 'android';
+			return "smp";
+		}else{
+			browser = 'safari';
+		}
+	}else if(userAgent.indexOf('android') != -1){
+		browser = 'android';
+		return "smp";
+	}
+	//return userAgent;
+	var html = document.getElementsByTagName('html');
+	html.item(0).className = browser;
+}
+var flgSMP = check_browser();	//スマホ判定//ブラウザのチェック
+
+function check_browser2(){
+	var userAgent = window.navigator.userAgent.toLowerCase();
+	var appVersion = window.navigator.appVersion.toLowerCase();
+	browser = '';
+	//alert(this.userAgent);
+	if(userAgent.indexOf('opera') != -1){
+		browser = 'opera';
+		return browser;
+	}else if (userAgent.indexOf('msie') != -1){
+		browser = 'ie';
+		
+		if(appVersion.indexOf("msie 6.") != -1){
+			browser = 'ie6';
+		}else if(appVersion.indexOf("msie 7.") != -1){
+			browser = 'ie7';
+		}else if(appVersion.indexOf("msie 8.") != -1){
+			browser = 'ie8';
+		}else if(appVersion.indexOf("msie 9.") != -1){
+			browser = 'ie9';
+		}
+		return browser;
+		
+	}else if(userAgent.indexOf('chrome') != -1){
+		if(userAgent.indexOf('android') != -1){
+			browser = 'android';
+			return browser;
+		}else{
+			return browser;
+		}
+	}else if(userAgent.indexOf('safari') != -1){
+		if(userAgent.indexOf('iphone') != -1){
+			browser = 'iphone';
+			return browser;
+		}else if(userAgent.indexOf('ipad') != -1){
+			browser = 'ipad';
+			return browser;
+		}else if(userAgent.indexOf('ipod') != -1){
+			browser = 'ipod';
+			return browser;
+		}else{
+			browser = 'safari';
+			return browser;
+		}
+	}else if(userAgent.indexOf('android') != -1){
+		browser = 'android';
+		return browser;
+	}
+}
+var flgBrowser = check_browser2();
+
+//
+
+//クッキー好き？モノによるかな…
+/*
+ * Cookie操作
+ * 保存、取得、削除ができる
+ * 
+ * created
+ * 2015/3/15 e-create:Suzuki 
+ * edited
+ */
+
+
+var Cookie = {
+	//クッキーを配列で取得する
+	get_all:function(){
+		var arrCookie = document.cookie.split('; ');
+		var objCookie = [];
+		for(var i=0; i<arrCookie.length; i++){
+			var cookie = arrCookie[i].split('=');
+			objCookie[cookie[0]] = cookie[1];
+		}
+		return objCookie;
+	},
+	
+	//クッキーを配列で取得する
+	get:function(key){
+		var objCookie = Cookie.get_all();
+		if(key){
+			if(objCookie[key]){
+				return decodeURIComponent(objCookie[key]);
+			}else{
+				return null;
+			}
+		}else{
+			//何も指定されていない場合は、全て取得してくる
+			return objCookie;
+		}
+	},
+	
+	//クッキーのセット
+	set:function(obj){
+		
+		if(!obj['key']){
+			obj['key'] = '';
+		}
+		if(!obj['value']){
+			obj['value'] = '';
+		}
+		// 有効期限を10日にしておく
+		if(!obj['time']){
+			obj['time'] = 10;
+		}
+		var expireDate = new Date();
+		expireDate.setTime(expireDate.getTime() + 3600*1000);
+		
+		var cookieName = obj['key'];
+		var cookieValue = obj['value'];
+		// Cookie値のエスケープには escape/unescape 関数を用いるのが一般的だが、
+		// 日本語を正しく処理できない場合があるため encodeURIComponent/decodeURIComponent を使用する
+		var strSetCookie	 = encodeURIComponent(obj['key']);
+		strSetCookie		+= '='+encodeURIComponent(obj['value']);
+		strSetCookie		+= '; path=/; expires='+expireDate.toGMTString();
+		document.cookie = strSetCookie;	
+		//cookieName = encodeURIComponent(obj['key']);
+		//cookieValue = encodeURIComponent(obj['value']);
+		//document.cookie = cookieName+"="+cookieName + "; expires=" + expire_date.toGMTString();	
+	},
+	
+	//クッキーの削除
+	remove:function(key){
+		if(key){
+			var expireDate = new Date();
+			//削除：過去の日付を設定する
+			expireDate.setTime(expireDate.getTime()-1000);
+			
+			var strSetCookie	 = encodeURIComponent(key);
+			strSetCookie		+= '='; /* value を空にする */
+			strSetCookie		+= '; expires='+expireDate.toGMTString();
+			document.cookie = strSetCookie;	
+		}
+		
+	}
+};
+
+
+
+// JavaScript Document
+
+//配列と形式を返す
+function get_search_title(key){
+	var searchObj = {
+		//title
+		'title': [],
+		
+		//or, and
+		'type': ''
+	};
+	switch(key){
+		case '7大棋戦':
+		case "checkbox1":
+			searchObj['title'] = [
+				"棋聖戦",
+				"名人戦",
+				"本因坊戦",
+				"王座戦",
+				"天元戦",
+				"碁聖戦",
+				"十段戦"
+			];
+			searchObj['type'] = 'or';
+			
+		break;
+		case "checkbox4":
+		case '女流棋戦':
+			searchObj['title'] = [
+				"女流本因坊戦",
+				"女流名人戦",
+				"女流棋聖戦",
+				"会津中央病院杯"
+			];
+			searchObj['type'] = 'or';
+		break;
+		
+		case "checkbox2":
+		case '市ヶ谷本院・有楽町囲碁センター':
+			searchObj['title'] = [
+				"市ヶ谷本院",
+				"有楽町囲碁センター"
+			];
+			searchObj['type'] = 'or';
+		break;
+		
+		case "checkbox3":
+		case '関西総本部・梅田囲碁サロン':
+			searchObj['title'] = [
+				"関西総本部",
+				"梅田囲碁サロン"
+			];
+			searchObj['type'] = 'or';
+		break;
+		/*
+		case '女流棋戦':
+			searchObj['title'] = [
+				'女流棋戦'
+			];
+			searchObj['type'] = 'and';
+		break;
+		*/
+		case "checkbox5":
+		case '中部総本部':
+			searchObj['title'] = [
+				"中部総本部"
+			];
+			searchObj['type'] = 'or';
+		break;
+		default:
+		break;
+	}
+	
+	return searchObj;
+};
+
+//配列形式で検索結果を返す
+function arr_search_title(key){
+	var getSearch = get_search_title(key);
+	return getSearch['title'];
+}
+
+//URL形式で検索結果を返す
+function url_search_title(key){
+	var urlsearch = '';
+	var getSearch = get_search_title(key);
+	switch(getSearch['type']){
+		case 'or':
+			return getSearch['title'].join(' OR ');
+		break;
+		case 'and':
+			return getSearch['title'].join(' AND ');
+		break;
+		default:
+		break;
+	}
+}
+
+//--------------------------------------------------
+// お気に入り
+function returnFavo() {
+	var favorite = '';
+	var arrFavo = {
+		checkbox1:'7大棋戦',
+		checkbox2:'市ヶ谷本院・有楽町囲碁センター',
+		checkbox3:'関西総本部・梅田囲碁サロン',
+		checkbox4:'女流棋戦',
+		checkbox5:'中部総本部'
+	};
+	
+	for(var j=1;j<6;j++) {
+		if(Cookie.get('checkbox'+j) === "true") {
+			if(favorite !== "") {
+				favorite += ' OR '+url_search_title(arrFavo['checkbox'+j]);
+			}else{
+				favorite += url_search_title(arrFavo['checkbox'+j]);
+			}
+		}
+	}
+	for(var j=1;j<7;j++) {
+		
+		if(Cookie.get('free'+j) !== null) {
+			if(favorite !== "") {
+				favorite += ' OR '+Cookie.get('free'+j);
+			}else{
+				favorite += Cookie.get('free'+j);
+			}
+		}
+	}
+	//favorite="  女流本因坊戦 OR 女流名人戦 OR 女流棋聖戦 OR 会津中央病院杯  ";
+	//console.log(favorite);
+	return favorite;
+}
+
+
+//--------------------------------------------------
+// 日本棋院
+// テンプレートJS
+var nk = {
+	//--------------------------------------------------
+	// ドメイン以降からの文字列を返す
+	// トップページは空文字が返る
+	lh:function() {
+		var arrUrl = location.href.split("/");
+		arrUrl.splice(0,3);
+		var strUrl = arrUrl.join("/");
+		return strUrl;
+	},
+	//--------------------------------------------------
+	// タブ切り替え
+	// openTab…数値もしくはクラス名
+	change_tab:function(closeTab,openTab,tabCurrent) {
+		$(closeTab).css("display","none");
+		if(openTab >= 0) {
+			$(closeTab).eq(openTab).css("display","block");
+		}else{
+			$(openTab).css("display","block");
+		}
+		// カレント制御
+		$(tabCurrent).removeClass("current");
+		$(tabCurrent).each(function() {
+			if($(this).children().attr("onclick").match(openTab.replace(".","\."))) {
+				$(this).addClass("current");
+				$(this).children().css("outline","none");
+			}
+		});
+	},
+	//--------------------------------------------------
+	// 棋戦ページのタブ切り替え
+	kisen_tab:function() {
+		var href = nk.lh().split("?");
+		var strOpen = "";
+		if(href.length == 2) {
+			strOpen = decodeURI(href[1]);
+		}else{
+			strOpen = $(".sub_catlist:eq(1) li.current").text();
+		}
+		
+		$(".sub_catlist:eq(1) li").removeClass("current");
+		$(".sub_catlist:eq(1) li").each(function(index) {
+			if($(this).text() == strOpen) {
+				$(this).addClass("current");
+				nk.change_tab(".tab_display",index);
+			}
+			if(strOpen == ""){
+				nk.change_tab(".tab_display");
+			}
+		});
+	},
+	url:new Array()
+};
+
+// ブログ記事をまとめておく配列
+var arrTopBlog = new Array();
+// ブログ記事を出力する最大数
+var intBlogCount = 10;
+
+// RSSの取得用
+var rss = {
+	// 日付を取得する（YYYYMMDD形式）
+	fn_get_date:function(objDate) {
+		var strDate = objDate.getFullYear();
+		strDate += rss.fn_format2(objDate.getMonth()+1);
+		strDate += rss.fn_format2(objDate.getDate());
+		return strDate;
+	},
+	// 投稿時間を取得する（YYYYMMDDHHiiss形式）
+	fn_get_datetime:function(objDate) {
+		var strDate = rss.fn_get_date(objDate);
+		strDate += rss.fn_format2(objDate.getHours());
+		strDate += rss.fn_format2(objDate.getMinutes());
+		strDate += rss.fn_format2(objDate.getSeconds());
+		return strDate;
+	},
+	// 2桁の0埋め
+	fn_format:function(intNum) {
+		if(intNum < 10) {
+			intNum = "0"+intNum;
+		}
+		return ""+intNum;
+	},
+	// 上のfn_formatが使えない場合
+	fn_format2:function(num) {
+		num += "";
+		if(num.length === 1) {
+			num = "0"+num;
+		}
+		return ""+num;
+	},
+	// RSSを取得する
+	fn_get_rss:function(strUrl) {
+		var objRss = {};
+		objRss = new google.feeds.Feed(strUrl);
+		objRss.setNumEntries(10);
+		return objRss;
+	},
+	// RSSの表示順を並び替える
+	fn_sort_rss:function() {
+		$("#social .blog ul li").each(function() {
+			var boolHit = false;
+			for(var j=0;j<arrTopBlog.length;j++) {
+				if(arrTopBlog[j][1] == $(this).find("div").html()) {
+					boolHit = true;
+				}
+			}
+			if(!boolHit) {
+				if($(this).find("div").html() != undefined) {
+					var data = [$(this).children("label").text()-0,$(this).find("div").html()];
+					if(arrTopBlog != undefined) {
+						arrTopBlog[arrTopBlog.length] = data;
+					}
+				}
+			}
+		});
+		
+		// 降順にソート
+		arrTopBlog.sort(function(a,b){
+			var aa = a[1];
+			var bb = b[1];
+			if(aa < bb){return 1;}
+			if(aa > bb){return -1;}
+			return 0;
+		});
+		
+		// ブログを出力する
+		if(arrTopBlog.length > 0) {
+			$("#social .blog ul").html("");
+			for(var i=0;i<intBlogCount;i++) {
+				if(arrTopBlog[i] !== undefined) {
+					$("#social .blog ul").append('<li>'+(arrTopBlog[i][1])+'</li>');
+					// ブログ記事のタイトルを取得する
+					for(var j=0;j<$("#blogTitle p").length;j++) {
+						if($("#social .blog ul li").eq($("#social .blog ul li").length-1).find("a").attr("href").match($("#blogTitle p").eq(j).children().attr("href"))) {
+							$("#social .blog ul li").eq($("#social .blog ul li").length-1).children(".blog_title").html('<a href="" target="_blank">'+$("#blogTitle p").eq(j).text()+'</a>');
+							$("#social .blog ul li").eq($("#social .blog ul li").length-1).find(".blog_title a").attr("href",$("#social .blog ul li").eq($("#social .blog ul li").length-1).find(".title a").attr("bhref"));
+							var imgHtml = $("#social .blog ul li").eq($("#social .blog ul li").length-1).find("p.img").html();
+							$("#social .blog ul li").eq($("#social .blog ul li").length-1).find("p.img").remove();
+							$("#social .blog ul li").eq($("#social .blog ul li").length-1).prepend('<p class="img">'+imgHtml+'</p>');
+							var time = $("#social .blog ul li").eq($("#social .blog ul li").length-1).find("span.time").html();
+							$("#social .blog ul li").eq($("#social .blog ul li").length-1).find("span.time").remove();
+							$("#social .blog ul li").eq($("#social .blog ul li").length-1).find("span.date").append('<span class="time">'+time+'</span>');
+						}
+					}
+				}
+			}
+			$("#social .blog").css("background","#fff");
+		}
+		
+		/*
+		//ブログのタイトルを書き換える
+		$('.blog li').each(function(index, element) {
+			if(titleLists[$('.blog_title a').attr('href')]){
+				$('.blog_title a').html(titleLists[$('.blog_title a').attr('href')]);
+			}
+		});
+		*/
+		//ブログのタイトルを書き換える(/common/js/kishi_blog.js)
+		changeBlogTitle2();
+	}
+};
+
+//--------------------------------------------------
+// ブログ棋士タイトル用
+var titleLists = {};
+
+//文字の置換
+function replace_all(str, rep, after){
+	return str.split(rep).join(after);
+}
+
+function not_top() {
+	if(nk.lh() === "") {
+		/*
+		if($(window).width() > 768) {
+			$('#header nav ul li').css({
+				'display': '',
+				'float': '',
+				'height': '',
+				'margin-right': '',
+				'width': ''
+			});
+		}else{
+			$('#header nav ul li').css({
+				'display': 'block',
+				'float': 'left',
+				'height': '48px',
+				'margin-right': '0.5%',
+				'width': '33%'
+			});
+		}
+		*/
+	}
+}
+$(function() {
+	// トップページ用
+	if(nk.lh() === "") {
+		nk.change_tab(".tab_box","div.pickup",".cat_list li");
+		
+		
+		//--------------------------------------------------//--------------------------------------------------
+		// ブログの棋士タイトルを取得し、表示する
+		//URL指定
+		/*
+		var uri = 'http://blog.goo.ne.jp/portal/official_blog_list/official_blog_igo';
+		$.get(uri, function(data){
+		
+			
+			var text = data.responseText;
+			text = text.split('<!--c05_4-->');
+			text = text[1].split('<!--/c05_4-->');
+			text = text[0];
+			text = replace_all(text, "\n", '');
+			
+			//一旦htmlに書き出す
+			$('body').append('<div id="blogList" style="display: none;">'+text+'</div>');
+				
+				//値の取得
+				$('#blogList dl').each(function(index, element) {
+				
+				//hrefと名前を取得
+				var list = '<ul>';
+				var title = $('strong a', $(this));
+				var aTitle = uri+title.attr('href');
+				list += '<li><a href="'+aTitle+'">';
+				list += title.html()+'</a></li>';
+				
+				//hrefをキーとした連想配列に格納
+				titleLists[aTitle] = title.html();
+				$('body').append(list);
+			});
+		
+		});
+		*/
+		// 
+		//--------------------------------------------------//--------------------------------------------------
+		
+		
+	}else{
+		not_top();
+	}
+	// 棋戦ページ用
+	if(nk.lh().match("match")) {
+		nk.kisen_tab();
+	}
+	//囲碁学校（教室）ページ用
+	if(nk.lh().match("/school/index.html")) {
+		var url = location.href;
+		parameters = url.split("?");
+		if(parameters[1] !== undefined) {
+			params   = parameters[1].split("&");
+			var paramsArray = [];
+			for ( i = 0; i < params.length; i++ ) {
+				neet = params[i].split("=");
+				paramsArray.push(neet[0]);
+				paramsArray[neet[0]] = neet[1];
+			}
+			var tab = paramsArray["tab"];
+			var tab = '.'+tab;
+			nk.change_tab('.tab_box',tab,'.cat_list li');
+		}
+	}
+});
+$(window).load(function() {
+	//--------------------------------------------------
+	// aタグのリンク先にGETパラメータが存在する場合
+	// エンコードし、IEで化けないようにする
+	/*
+	$("a").each(function() {
+		if($(this).attr("href").match(/\?/)) {
+			var arrKisen = $(this).attr("href").match(/\?(.+)/);
+			$(this).attr("href",$(this).attr("href").replace(arrKisen[1],encodeURIComponent(arrKisen[1])));
+		}
+	});
+	*/
+	
+	/******************************************************************
+		*	▼ News（出版・販売）
+	*****************************************************************/
+	
+	//--------------------------------------------------
+	// ボックスの高さを揃える
+	// $flgSMP : 共通変数
+	if(location.href.indexOf('favorite') === -1 || location.href.indexOf('/cgi-bin/powercms/mt/mt-search.cgi') === -1) {
+	$.getScript("/common_static_page/js/jquery.flatheights.js",function() {
+		var nka = [
+			'.height_eq4',parseInt(4),
+			'.height_eq3',parseInt(3),
+			'.height_eq2',parseInt(2),
+			'.height_eq',0
+		];
+		if( flgSMP != 'smp' ){	//スマホの場合は処理しない
+			for(var j=0;j<nka.length;j+=2) {
+				
+				if(nka[j+1]!=0) {
+					for(var i=0;i<$(nka[j]).length;i++) {
+						var sets = [], temp = [];
+						$(nka[j]+':eq('+i+')').each(function() {
+							$(this).children().each(function(index) {
+								temp.push(this);
+								if(index % nka[j+1] == nka[j+1]-1) {
+									sets.push(temp);
+									temp = [];
+								}
+							});
+							if(temp.length) sets.push(temp);
+							
+							$.each(sets,function() {
+								$(this).flatHeights();
+							});
+						});
+					}
+				}else{
+					$(nka[j]).flatHeights();
+				}
+			}
+		}
+		
+		
+		$(function() {/* ページ内ナビの高さ揃え。PC・スマホ共通
+		http://153.120.14.90/format_html/*/
+			var sets = [], temp = [];
+			$('.ul_pagelink a').each(function(i){
+				temp.push(this);
+				if (i % 4 == 3){ // 1行の数を指定し、1を引いた数を右に指定
+					sets.push(temp);
+					temp = [];
+				}
+			});
+			if (temp.length) sets.push(temp);
+			$.each(sets, function(){
+				$(this).flatHeights();
+			});
+			});
+		});
+
+	}
+	
+	// News（お知らせ）サイド：年別アーカイブの開閉
+	$(".archive_year ul.lst_m").hide();
+	$(".archive_year .arch_btn").click(function(){
+		var match = $(this).children().attr("src").match("open");
+		// open及びcloseボタンの切り替え
+		if(match !== null) {
+			$(this).children().attr("src",$(this).children().attr("src").replace("open","close"));
+		}else{
+			$(this).children().attr("src",$(this).children().attr("src").replace("close","open"));
+		}
+		$(this).next().slideToggle("slow");
+		
+	});
+					 
+ /******************************************************************
+  *	▼ 新着情報
+	*****************************************************************/
+	
+	//atom.xml 読み込み用
+	var path = location.pathname;
+	if(path == "/"){
+		//トップページの場合
+		$('#whats_new div.tab_box').each(function(){
+			var blogDir = $(this).attr('id');
+			if(blogDir != 'undefined'){
+				if( blogDir != 'favoBox'){
+			//console.log(blogDir);
+					xmlLoad(blogDir);
+				}
+			}
+		});
+		//画像トピック
+		var blogDir = "photo_news";
+		xmlLoad(blogDir);
+	}
+	else if( path.indexOf('/member/') != -1 ){
+		//会員情報ページの場合
+		if( $('#content').find('.colR').size() ){
+			xmlLoad('member');
+		}
+	}
+	else if( path == '/match/' || path == '/player/' || path == '/publishing/' || path == '/event/' || path == '/pickup/' || path == '/sisetsu/' ){
+		//トップページ以外
+		$('div.cate_news').each(function(){
+			var blogDir = $(this).attr('id');
+			if(blogDir != 'undefined'){
+				xmlLoad(blogDir);
+			}
+		});
+		//画像トピック
+		var blogDir = "photo_news";
+		xmlLoad(blogDir);
+	}
+	
+	if(nk.lh() === "") {
+		$('#whats_new').prepend('<ul class="cat_list pc_none"><li class="current">'+($('#whats_new > ul li').eq(0).html())+'</li><li>'+($('#whats_new > ul li').eq(1).html())+'</li><li>'+($('#whats_new ul li').eq($('#whats_new > ul li').length-1).html())+'</li></ul>');
+		$('#whats_new > ul:eq(1) li').eq(0).addClass("sp_none");
+		$('#whats_new > ul:eq(1) li').eq(1).addClass("sp_none");
+		$('#whats_new > ul:eq(1) li:eq('+($('#whats_new > ul:eq(1) li').length-1)+')').addClass("sp_none");
+	}
+
+	//各施設TOPのニュース欄にトピック画像を表示
+	// パターン①　-------------------------------------//--------------------------------------------------
+//	function fnAddPhoto(){
+//		if( path.indexOf('/event/news/area.html') != -1 || path.indexOf('/event/news/frm_news_') != -1 ){
+//			var siteURL = "//" + location.host;
+//			var strId = $('.cate_news').attr('id');
+//			return $.ajax({
+//					type: 'GET',
+//					url: siteURL + '/photo_news/index.html',
+//					dataType: 'html',
+//					success: function(data){
+//						$(data).find('div.photoCat').each(function(){
+//							var photoCategory = $(this).attr('id');
+//							if( photoCategory == strId ){
+//								$('.notice_photo').html( $(data).find('#' + photoCategory + ' .notice_photo').html() );
+//							}
+//						});
+//					}
+//			});
+//		}
+//	}
+//	$.when(fnAddPhoto()).done(function(data1){
+//		//iframe高さ調整
+//		if( path.indexOf('/event/news/area.html') != -1 || path.indexOf('/event/news/frm_news_') != -1 ){
+//			setTimeout(function(){
+//				var innHeight = $('body').height();
+//				if(navigator.userAgent.match(/msie 8/i)) {	// IE8対策
+//					parent.$('iframe.news_frm').height(innHeight);
+//				}else{
+//					parent.$('iframe.news_frm').height(innHeight+20);
+//				}
+//			}, 1000);
+//		}
+//	});
+
+	// パターン②　-------------------------------------//--------------------------------------------------
+	if( path.indexOf('sisetsu') != -1 ){
+		var arrPath = path.split('/sisetsu/');
+		var newsURL = '';
+		var sisetsuCate = '';
+		var topFlg = 0;
+		if( arrPath[1] == 'index.html' || arrPath[1] == '' ){
+			//$('iframe.news_frm').remove();
+			//$('#bnrHeader').after( '<div class="whats_new"></div>' );
+			newsURL = '/event/news/area.html';
+			sisetsuCate = 'sisetsu';
+			topFlg = 1;
+		}
+		else{
+			var arrSisetsuDir = arrPath[1].split('/');
+			if( arrSisetsuDir[1] == 'index.html' || arrSisetsuDir[1] == '' ){
+				//$('iframe.news_frm').remove();
+				//$('.h1_wrapper').after( '<div class="whats_new"></div>' );
+				newsURL = '/event/news/frm_news_' + arrSisetsuDir[0] + '.html';
+				sisetsuCate = arrSisetsuDir[0];
+				topFlg = 1;
+			}
+		}
+		function fnShowSisetsuNews(){
+			if( newsURL != '' ){
+				$('div.whats_new').load( newsURL + ' div.whats_new .inner');
+			}
+		}
+		$(document).ready(function(){
+			$.when(fnShowSisetsuNews()).done(function(data1){
+				if( topFlg == 1){
+					var strId = sisetsuCate + '_news';
+					$.ajax({
+						type: 'GET',
+						url: '/photo_news/index.html',
+						dataType: 'html',
+						success: function(data){
+							$(data).find('div.photoCat').each(function(){
+								var photoCategory = $(this).attr('id');
+								if( photoCategory == strId ){
+									$('.notice_photo').html( $(data).find('#' + photoCategory + ' .notice_photo').html() );
+								}
+							});
+						}
+					});
+				}
+			});
+		});
+	}
+
+	
+});
+
+// トップページ用
+if($(".blog").get(0)) {
+	// RSSフィードの読み込み
+	google.load("feeds","1");
+}
+
+// RSSを取得し出力する
+function rss_initialize(nk) {
+	var objKiin = {};
+	// 日本棋院のRSS一覧を取得する
+	objKiin = rss.fn_get_rss("http://blog.goo.ne.jp/portal_rss/official_blog_list/official_blog_igo");
+	
+	// RSSを読み込む
+	objKiin.load(function(results) {
+		if(!results.error) {
+			// RSSの最後の記事になったらソートする
+			for(var i=0;i<results.feed.entries.length;i++) {
+				objKiin.entrys = results.feed.entries[i];
+				
+				// RSSのリスト一覧から個別にRSSを取得する
+				objKiin.objFeed = rss.fn_get_rss(results.feed.entries[i].link+"rss2.xml");
+				
+				// ブログ記事タイトルをためておく
+				$("#blogTitle").append('<p><a href="'+objKiin.entrys.link+'">'+objKiin.entrys.categories[0]+'</a></p>');
+				objKiin.objFeed.load(function(result) {
+					if(!result.error) {
+						// エラーがなければループする
+						for(var j=0;j<result.feed.entries.length;j++) {
+							objKiin.entry = result.feed.entries[j];
+							
+							// 日付を整形する
+							var strDate = rss.fn_get_date(new Date(objKiin.entry.publishedDate));
+							var strTime = rss.fn_get_datetime(new Date(objKiin.entry.publishedDate));
+							
+							// 年月日データを整形する＆時間データを整形する
+							var arrDate = strDate.match(/([0-9]{4})([0-9]{2})([0-9]{2})/);
+							var arrTime = strTime.match(/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/);
+							
+							if(arrDate !== null && arrTime !== null) {
+								strDate = arrDate[1] + "/" + arrDate[2] + "/" + arrDate[3];
+								
+								var arrShortLink = objKiin.entry.link.split("/e/");
+								var arrLinkPath = arrShortLink[0].split("/");
+								var strLastPath = arrLinkPath[arrLinkPath.length-1];
+								
+								// 出力用HTMLを作成
+								var strHtml = ''
+									+ '<li>'
+										+ '<label>'+rss.fn_get_datetime(new Date(objKiin.entry.publishedDate))+'</label>'
+										+ '<div>'
+											+ '<span class="date">'+strDate+'</span>'
+											+ '<p class="blog_title">'+objKiin.entrys.categories+'</p>'
+											+ '<p class="title">'
+												+ '<a href="'+objKiin.entry.link+'" target="_blank" bhref="'+arrShortLink[0]+'">'+objKiin.entry.title
+												+ '</a>'
+											+ '</p>'
+											+ '<p class="img"><img src="http://blogimg.goo.ne.jp/img/portal/officialblog/70x70/'+strLastPath+'.gif"></p>'
+											+ '<span class="time">'+arrTime[4] + ":" + arrTime[5] + ":" + arrTime[6]+'</p>'
+										+ '</div>'
+									+ '</li>';
+								$("#social .blog ul").append(strHtml);
+							}
+							// RSSの最後の記事になったらソートする
+							if((result.feed.entries.length-1) == j) {
+								rss.fn_sort_rss();
+							}
+						}
+					}
+				});
+			}
+		}
+	});
+}
+
+// 棋士ブログ一覧のRSSを取得し出力する
+function rss_initialize2(nk) {
+	var objKiinBlg = {};
+	// 日本棋院のRSS一覧を取得する
+	objKiinBlg = rss.fn_get_rss("http://blog.goo.ne.jp/portal_rss/official_blog_list/official_blog_igo");
+	
+	// RSSを読み込む
+	objKiinBlg.load(function(results) {
+		if(!results.error) {
+			for(var i=0;i<results.feed.entries.length;i++) {
+				objKiinBlg.entries = results.feed.entries[i];
+				var entry_title = objKiinBlg.entries.title;	
+				var blog_title = objKiinBlg.entries.categories[0];
+				var blog_url = objKiinBlg.entries.link;
+				var author = objKiinBlg.entries.author;
+				
+				var delText = '('+blog_title+')';
+				entry_title = entry_title.replace(delText, '');
+				
+				//ブログのタイトルを書き換える(/common/js/kishi_blog.js)
+				blog_title = changeBlogTitle2(blog_title);
+				
+				// 日付を整形する
+				var strDate = rss.fn_get_date(new Date(objKiinBlg.entries.publishedDate));
+				var strTime = rss.fn_get_datetime(new Date(objKiinBlg.entries.publishedDate));
+				//var arrTime = objKiinBlg.entries.publishedDate.split(' ');
+				
+				// 年月日データを整形する＆時間データを整形する
+				var arrDate = strDate.match(/([0-9]{4})([0-9]{2})([0-9]{2})/);
+				var arrTime = strTime.match(/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/);
+				
+				if(arrDate !== null && arrTime !== null) {
+					strDate = arrDate[1] + "/" + arrDate[2] + "/" + arrDate[3];
+					
+					// 出力用HTMLを作成
+					var strHtml = ''
+						+ '<li class="'+author+'">'
+							+ '<p class="img"><img src="http://blogimg.goo.ne.jp/img/portal/officialblog/70x70/'+author+'.gif"></p>'
+							+ '<span class="date">'+strDate
+								+ '<span class="time">'+arrTime[4]+':'+arrTime[5]+':'+arrTime[6]+'</span>'
+							+ '</span>'
+							+ '<p class="blog_title">'
+								+ '<a href="'+blog_url+'" target="_blank">'+blog_title+'</a>'
+							+ '</p>'
+							+ '<p class="title"></p>'
+						+ '</li>';
+					$("#social .blog ul").append(strHtml);
+				}
+				
+				// RSSのリスト一覧から個別ブログのRSSを取得する（新着記事のリンク取得のため）
+				objKiinBlg.objFeed = rss.fn_get_rss(results.feed.entries[i].link+"rss2.xml");
+				
+				objKiinBlg.objFeed.load(function(result) {
+					if(!result.error) {
+						// エラーがなければループする
+						objKiinBlg.entry = result.feed.entries[0];	
+						//console.log(entry_url);
+								
+						var arrShortLink = objKiinBlg.entry.link.split("/e/");	
+						var arrLinkPath = arrShortLink[0].split("/");
+						
+						var entry_title = objKiinBlg.entry.title;
+						if( entry_title.length > 16 ){
+							entry_title = entry_title.substring(0, 15) + '...';
+						}
+						
+						// 出力用HTMLを作成
+						var strHtml = ''
+							+ '<a href="'+objKiinBlg.entry.link+'" target="_blank" bhref="'+arrShortLink[0]+'">'+entry_title
+							+ '</a>';
+						$('#social .blog ul li.'+arrLinkPath[3]+' .title').append(strHtml);
+					}
+				});
+			}
+		}
+	});
+}
+
+// トップページ用
+if(nk.lh().match("social.html")) {
+	//google.setOnLoadCallback(rss_initialize);
+	google.setOnLoadCallback(rss_initialize2);
+}
+
+
+/*------------------------------------------------/
+ * トップページ新着情報
+ * atom.xmlを取得・解析し、htmlを出力。
+ -----------------------------------------------*/
+// 初期設定（いったんHTMLを空にする）
+//$(function(){
+//    $("#whats_new ul.news_list").html("");
+//});
+
+
+// XML読み込み
+function xmlLoad(dir){
+	
+		var host = location.host;
+		if( dir == "member" ){
+			$.ajax({
+					url:'//' + host + '/publishing/magazine_atom.xml',
+                    cache : false,
+					type:'get',
+					dataType:'xml',
+					timeout:2000,
+					success:parse_maga_xml
+			});
+		}
+		else{
+			$.ajax({
+					url:'//' + host + '/' + dir + '/atom.xml',
+                    cache : false,
+					type:'get',
+					dataType:'xml',
+					timeout:2000,
+					success:parse_xml
+			});
+		}
+}
+
+// XMLデータを取得（会員情報ページの場合）
+function parse_maga_xml(xml,status){
+	if(status!='success')return;
+	$(xml).find('entry').each(disp_maga);
+}
+// XMLデータを取得（会員情報ページ以外）
+function parse_xml(xml,status){
+	if(status!='success')return;
+	$(xml).find('entry').each(disp);
+}
+
+
+// HTML生成関数（会員情報ページの場合）
+function disp_maga(){
+	
+	//各要素を変数に格納
+	var entryTitle = $(this).find('title').text();
+	var imgCateBase = $(this).find('category').attr('base');
+	var imgCateLabel = $(this).find('category').attr('term');
+	var imgSrc = $(this).find('figure').text();
+
+	$('div.colR figure').each(function(){
+		var category = $(this).children('a').attr('href');
+		if( category.indexOf(imgCateBase) != -1 ){
+			$(this).find('img').remove();
+			$(this).find('a').prepend(imgSrc).after('<figcaption>'+imgCateLabel+'</figcaption>');
+		}
+	});
+	
+}
+
+// HTML生成関数（会員情報ページ以外）
+function disp(){
+
+	//各要素を変数に格納
+	var page_title = $(this).find('title').text();		//ページタイトル
+	var blog_id = $(this).find('blogID').text();	
+	var entry_id ="";
+	var dirctory = $(this).find('directory').text();	
+	dirctory = dirctory.replace(/\u002f/g, '');
+	
+	//ブログ名取得
+	var blog_name = "";
+	if(dirctory=="pickup"){
+		blog_name = "ピックアップ";
+	}
+	else if(dirctory=="news"){
+		blog_name = "お知らせ";
+	}
+	else if(dirctory=="match_news"){
+		blog_name = "棋戦情報";
+	}
+	else if(dirctory=="player_news"){
+		blog_name = "棋士情報";
+	}
+	else if(dirctory=="event"){
+		blog_name = "囲碁大会・イベント";
+	}
+	else if(dirctory=="publishing"){
+		blog_name = "出版・販売情報";
+	}
+	
+	var arrPhotoSelector = {}; //配列初期化
+	if(dirctory == "photo_news"){
+		entry_id = $(this).find('entryid').text();
+		if( entry_id == "108" ){
+			$(this).find('category').each(function(){
+				var category = $(this).attr('base');
+				arrPhotoSelector[category] = '#' + category + ' div.notice_photo';	//画像トピック 出力先セレクタ
+			});
+		}
+		else{
+			var category = $(this).find('category').attr('base');
+			var photo_selector = '#' + category + ' div.notice_photo';	//画像トピック 出力先セレクタ
+		}
+		blog_name = $(this).find('category').attr('term');
+	}
+	else{
+		var selector = '#' + dirctory + ' ul.news_list';	//新着情報 出力先セレクタ
+		var day = $(this).find('published').text();		//公開日
+		var primary = $(this).find('primary').text();	//メインカテゴリ
+		var url = $(this).find('link').attr('href');		//記事URL
+		//var $content = $(this).find('content').text();
+	}
+	
+	if(dirctory == "pickup"){
+		var count = $(this).find('count').text();
+		var photo_selector = '#' + dirctory + ' div.notice_photo';	//ピックアップの画像トピック出力先セレクタ
+	}
+	else{
+		var count = $(this).find('count').attr('name');
+	}
+	
+	//「囲碁大会・イベント」と「出版・販売」はニュース用タイトルを表示
+	var title = '';
+	var news_title = $(this).find('newstitle').text();
+	if(news_title != ''){
+		title = news_title;
+	}
+	else{
+		title = page_title;
+	}
+	
+	//（出版・販売）「販売」の場合はリンク先URLを設定
+	var news_url = '';
+	var news_url = $(this).find('newsurl').text();
+	if(news_url != ''){
+		url = news_url;
+	}
+	
+	//画像トピックの各要素を変数に格納
+	var type = '';
+	if(dirctory == "photo_news" || dirctory == "pickup"){
+		var link_url = $(this).find('flink').text();
+		type = $(this).find('type').text();
+		if(type == "normal"){
+			var normal = $(this).find('normal').text();
+			var shosai = $(this).find('shosai').text();
+		}else if(type == "vs"){
+			var vsleft = $(this).find('vsleft').text();
+			var ltplayer = $(this).find('ltplayer').text();
+			var ltlink = $(this).find('ltlink').text();
+			var vsright = $(this).find('vsright').text();
+			var rtplayer = $(this).find('rtplayer').text();
+			var rtlink = $(this).find('rtlink').text();
+			var shosai = $(this).find('shosai').text();
+		}else if(type == "publish"){
+			var weekly = $(this).find('weekly').text();
+			var welink = $(this).find('welink').text();
+			var world = $(this).find('world').text();
+			var wolink = $(this).find('wolink').text();
+			var future = $(this).find('future').text();
+			var fulink = $(this).find('fulink').text();
+			var shosai = $(this).find('shosai').text();
+		}
+	}
+	
+	//GAタグを生成
+	var ga = ' onClick="ga(\'send\',\'event\',\'タブ-' + blog_name + '\',\'クリック\',\'' + title + '\');"';
+	
+	//HTMLを生成
+	if(blog_id != "11"){
+		$('<li class="'+count+'">'+
+				'<span class="date left">'+day+'</span>'+
+				'<span class="cate left">'+primary+'</span><br />'+
+				'<a href="'+url+'"'+ga+'>'+title+'</a>'+
+				'</li>').appendTo(selector);
+	}
+	
+	//画像ブロックのHTMLを生成
+	if(type != ""){
+		if(type == "normal"){
+			$('<p class="normal">'+normal+'</p>'+
+				'<div class="notice_info clear">'+
+					shosai+
+				'</div>').appendTo(photo_selector);
+			
+		}else if(type == "vs"){
+			if(ltlink){
+				var ltlinkTag = '<a href="'+ltlink+'">'+vsleft+'<span>'+ltplayer+'</span></a>';
+			}
+			else{
+				var ltlinkTag = vsleft+'<span>'+ltplayer+'</span>';
+			}
+			
+			if(rtlink){
+				var rtlinkTag = '<a href="'+rtlink+'">'+vsright+'<span>'+rtplayer+'</span></a>';
+			}
+			else{
+				var rtlinkTag = vsright+'<span>'+rtplayer+'</span>';
+			}
+			
+			$('<p class="vs left">'+ltlinkTag+
+				'</p>'+
+				'<p class="vs right">'+rtlinkTag+
+				'</p>'+
+				'<div class="notice_info clear">'+
+					shosai+
+				'</div>').appendTo(photo_selector);
+			
+		}else if(type == "publish"){
+			for( var key in arrPhotoSelector ){
+				var photo_selector = '#'+key+' div.pub_photo';
+				//$(photo_selector).css('display', 'none');
+				$('#'+key+' ul.news_list').after('<div class="notice_photo pub_photo"></div>');
+				$('<p class="publish">'+
+						'<a href="'+welink+'">'+weekly+'</a>'+
+						'<span>週刊碁</span>'+
+					'</p>'+
+					'<p class="publish">'+
+						'<a href="'+wolink+'">'+world+'</a>'+
+						'<span>月刊碁ワールド</span>'+
+					'</p>'+
+					'<p class="publish">'+
+						'<a href="'+fulink+'">'+future+'</a>'+
+						'<span>月刊囲碁未来</span>'+
+					'</p>').appendTo(photo_selector);
+			} //end for
+		}
+		
+		if(type != "publish"){
+			if(link_url != ''){
+				$('<p class="title"><a href="'+link_url+'"'+ga+' target="_blank">'+title+'</a></p>').prependTo(photo_selector +' div.notice_info');
+			}
+			else{
+				$('<p class="title">'+title+'</p>').prependTo(photo_selector +' div.notice_info');
+			}
+		}
+		
+	}	//end if
+}
+
+
+function sidebar() {
+	//サイドバーの位置をh1の高さによって変える
+	$('#sidenav:not(.sisetsu_each_top #sidenav,.event_top #sidenav,.profile_top #sidenav, .archive #sidenav,.news6_top #sidenav,.teach_top #sidenav,.match_top #sidenav)').css("top",($('.h1_wrapper').height()+20)*-1);
+}
+
+
+function login_view() {
+	
+}
+
+
+//関数実行
+$(function(){
+	// お問い合わせフォームに日本棋院IDをセットする
+	if($('.contact-form-field').get(0)) {
+		$('.contact-form-field').each(function() {
+			if($(this).find('.description').get()) {
+				$(this).find('.form-element input').after('<span style="margin-left:0.5em;" class="description">'+$(this).find('.description').text()+'</span>');
+				$(this).find('.form-label .description').remove();
+			}
+			if($(this).find('.form-element').height() > $(this).find('.form-label').height()) {
+				$(this).find('.form-label').css('height',$(this).find('.form-element').height());
+			}
+		});
+	}
+	$.ajax({
+		url:'/member/login/check/check.php?user_check=check',
+		type:'get',
+		dataType:'json',
+		success:function(data) {
+			if(!fnIsSp()) {
+				if(!(data == null)) {
+					$('#dLogin p span').html(data.name.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,''));
+					$('#dLogin ul li:eq(0),#dLogin ul li:eq(1)').css("display","none");
+					$('#liLogin > a img').remove();
+					//$('#liLogin > a').attr("href",'https://' + location.host + "/member/setting/").append('<img class="btn empty" src="/common/images/unav_loginchu.png">');
+					$('#liLogin > a').attr("href","#").append('<img class="btn empty" src="/common/images/unav_loginchu.png">');
+					$('#dLogin ul').prepend(''
+						+ '<li><a href="https://' + location.host + '/member/setting/">お気に入り設定・変更</a></li>'
+						+ '<li><a target="_blank" href="https://mypage.nihonkiin.or.jp/user">幽玄の間に移動</a></li>'
+						+ '<li><a href="/logout/">ログアウト</a></li>'
+					);
+					// トップページ用（お気に入りリストを表示する）
+					if(nk.lh() == "") {
+						$('#favoBox').append('<iframe width="0" height="0" id="favo_iframe" onload="getIframeHtml();" src="/favorite/?limit=5"></iframe>');
+						function getIframeHtml() {
+							if($('#favo_iframe').contents().find('#container #content section ul li').length > 0) {
+								$('#favoBox').html( $('#favo_iframe').contents().find('#container #content section ul').clone()).append('<ul class="sub_catlist" id="favoUl"><li><a href="/favorite/">すべてを見る</a></li><li><a href="/member/setting/">お気に入り設定・変更</a></li></ul>');
+							}
+						}
+					}
+					// お問い合わせフォームに日本棋院IDをセットする
+					if(location.href.indexOf('mt-contactform.cgi') !== -1) {
+						//$('input[name="identifier"]').val(data.id);
+						if($('input[name="form_kiinid"]').get(0)) {
+							$('input[name="form_kiinid"]').val(data.id);
+						}
+					}
+				}else{
+					//$('#liLogin > a').attr("href",'https://' + location.host + "/member/login/")
+					$('#liLogin > a').attr("href","#")
+				}
+			}else{
+				if(!(data == null)) {
+					$('#liLoginSP a').attr("href","/logout/").text("ログアウト");
+					// トップページ用（お気に入りリストを表示する）
+					if(nk.lh() == "") {
+						$('#favoBox').append('<iframe width="0" height="0" id="favo_iframe" onload="getIframeHtml();" src="/favorite/?limit=5"></iframe>');
+						function getIframeHtml() {
+							if($('#favo_iframe').contents().find('#container #content section ul li').length > 0) {
+								$('#favoBox').html( $('#favo_iframe').contents().find('#container #content section ul').clone()).append('<ul class="sub_catlist" id="favoUl"><li><a href="/favorite/">すべてを見る</a></li><li><a href="/member/setting/">お気に入り設定・変更</a></li></ul>');
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+	
+	
+ /******************************************************************
+  *	▼ News詳細
+	*****************************************************************/
+	
+	// テーブルタグの align 設定がFirefoxやOperaでは効かないため class追加
+	$('.news_detail .entry_body table').each(function() {
+		var align = $(this).attr('align');
+		if(align != ""){
+			$(this).addClass(align);
+		}
+	});
+		
+	$('.news_detail .entry_body table tr').each(function() {
+		var valign = $(this).attr('valign');
+		if(valign == "top"){
+			$(this).addClass('v_top');
+		}
+		else if(valign == "middle"){
+			$(this).addClass('v_mdl');
+		}
+		else if(valign == "bottom"){
+			$(this).addClass('v_btm');
+		}
+	});
+	
+	$('.news_detail .entry_body table').each(function() {
+		var border = $(this).attr('border');
+		var bdColor = $(this).attr('bordercolor');
+		if(border == "1"){
+			$(this).addClass('tbl_border');
+			$(this).find('th').css({'border-width':'1px', 'border-style':'solid', 'border-color':bdColor});
+			$(this).find('td').css({'border-width':'1px', 'border-style':'solid', 'border-color':bdColor});
+		}
+		$(this).find('table').each(function() {
+			var border = $(this).attr('border');
+			var table_Clss = $(this).attr('class');
+			if(border != "1" && table_Clss.indexOf('table')){
+				$(this).find('th').css('border', 'none');
+				$(this).find('td').css('border', 'none');
+			}
+		});
+	});
+	
+ /******************************************************************
+  *	▼ 棋士
+	*****************************************************************/
+	// 棋士一覧ページでtableに4人棋士がいない場合はtableにクラスを振り直す
+	$('.ul_players').each(function() {
+		var intLength = $(this).find('li').length;
+		if(intLength < 4){
+			$(this).addClass('ul_players_nbdr');
+		}
+	});
+	if(fnIsSp()) {
+		sidebar_sp();
+	}else{
+		sidebar();
+	}
+	
+	$('#comments .comment-footer a[title=返信]').click(function(){
+			var replay_text = $('label#comment-reply-label a').text();
+			replay_text = replay_text.replace('からの', 'さんからの');
+			$('label#comment-reply-label a').text(replay_text);
+	});
+					 
+ /******************************************************************
+  *	▼ 棋戦
+	*****************************************************************/
+	//棋戦 ドロップダウンメニューの表示切替
+	var selecter = ".match_detail .sub_catlist_area ul.sub_catlist";
+	//スマホ分岐
+	if( flgSMP != "smp" ){
+		$(selecter).children('li').hover(
+			function(){
+				//マウスオーバー処理
+				if( !$(this).hasClass('select') ){
+					$(this).find('ul.dropdown_menu').fadeIn(500).css('display', 'block');
+				}
+//				$(this).find('ul.dropdown_menu').fadeIn(500).css('display', 'block');
+			},
+			function(){
+				//マウスアウト処理
+				$(this).find('ul.dropdown_menu').fadeOut(500).css('display', 'none');
+			}
+		);
+	}
+	else{
+		$(selecter).children('li').each(function(){
+			$(this).children('a').remove();
+		});
+	
+		$(selecter).children('li').click(function(){
+			var flgOpen = $(this).find('ul.dropdown_menu').attr('class');
+			if( flgOpen.indexOf('open') != -1 ){
+				//表示中の場合は非表示に変更
+				$(this).find('ul.dropdown_menu').css('display', 'none');
+				$(this).find('ul.dropdown_menu').removeClass('open');
+			}
+			else{			
+				$(selecter).children('li').each(function(){
+					$(this).find('ul.dropdown_menu').css('display', 'none');
+				});
+				$(this).find('ul.dropdown_menu').css('display', 'block').addClass('open');
+			}
+		});
+	}
+
+
+ /******************************************************************
+  *	▼ その他
+	*****************************************************************/
+	
+	// スクロールするとページトップへ戻るボタンを表示
+	var topBtn = $('#goTop');    
+	topBtn.hide();
+	$(window).scroll(function(e){
+		e.preventDefault();
+		if($(this).scrollTop() > 300){
+			topBtn.fadeIn();
+		}else{
+			topBtn.fadeOut();
+		}
+		return false;
+	});
+	topBtn.click(function () {
+		$('body,html').animate({
+			scrollTop: 0
+		}, 500);
+		return false;
+	});
+	$('#liLogin img').attr('param','false');
+	//ログインボタンへのマウスオーバーでメニューを表示 画像も変更
+	$('#liLogin').mouseover(function(){
+		$("#dLogin").css("display","block");
+		if($("#liLogin img").attr('param') !== "true") {
+		}
+	}).mouseout(function(){
+		if($("#dLogin img").attr("src") !== "false") {
+			$("#dLogin").css("display","none");
+		}
+	});
+
+//スマホ用スライドナビ
+/*$(function (){
+	$('#menu a').toggle(function(){
+			$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav')
+			.css("display","none")
+			.animate({"right": 0,"width":"90%"}, "normal")
+			$('#header #headerLogo ul li#menu a').addClass('close');
+	},function(){
+			$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav')
+			.animate({"right":"-90%","width":0}, "normal")
+			.css("display","none");
+			$('#header #headerLogo ul li#menu a').removeClass('close');
+	});
+});*/
+	
+	//するするスクロール(^O^)
+	$('a[href^=#]').click(function(){
+		var href= $(this).attr("href");
+		var target = $(href == "#" || href == "" ? 'html' : href);
+		var position = target.offset().top;
+		$("html, body").animate({scrollTop:position}, 500, "swing");
+		return false;
+	});
+	// アコーディオン
+	$('.ac').next().css("display","none");
+	$('.ac').click(function() {
+		// 開く閉じるボタンの切り替え
+		if($(this).children("span").text() == "開く") {
+			$(this).children("span").text("閉じる");
+		}else{
+			$(this).children("span").text("開く");
+		}
+		$(this).next().slideToggle("slow");
+	});
+	//alert($(window).width());
+
+	if($('form[action="http://staging.nihonkiin.or.jp/cgi-bin/powercms/mt/mt-comments.cgi"]').get(0)) {
+		var name = eval('('+Cookie.get("name")+')');
+		$('#comment-author').val(name.user_name.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').replace('+',' '));
+	}
+});
+
+var getUrlVars = function(){
+    var vars = {}; 
+    var param = location.search.substring(1).split('&');
+    for(var i = 0; i < param.length; i++) {
+        var keySearch = param[i].search(/=/);
+        var key = '';
+        if(keySearch != -1) key = param[i].slice(0, keySearch);
+        var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+        if(key != '') vars[key] = decodeURI(val);
+    } 
+    return vars; 
+}
+/**
+ * [対応ブラウザ] IE5～
+ * [関数名] setStartPage
+ * [機　能]指定したURLをブラウザののスタートページに設定する
+ * @param object オブジェクト名
+ * @param string スタートページに設定するURL
+*/
+function setStartPage(obj, url) {
+	var agent=navigator.userAgent;
+	var ie=agent.indexOf("MSIE");
+	var iever=parseInt(agent.substring(ie+5, ie+6));
+	var os=agent.indexOf("Windows");
+
+	// ブラウザがIEでかつバージョンが5以上の場合のみ実行
+	if((ie > 0) && (iever >= 5) && (os > 0) && !window.opera){
+		// スタートページニ設定するのURL
+		var StartPage=url;
+		//DHTMLビヘイビアのsaveFavorite機能を使用するための指定
+		obj.style.behavior="url('#default#homepage')";
+		// 指定したURLをスタートページに設定
+		obj.setHomePage(StartPage);
+		// スタートページに移動
+		if(confirm("設定したスタートページに移動しますか？")){
+			obj.navigateHomePage();
+		}else{
+			return;
+		}
+	}else{
+		alert("IEのみでサポートされています");
+	}
+}
+
+/**=====================================================================================
+	▼ここからスマホ対応用処理▼
+*/
+//--------------------------------------------------
+// スマホ判定
+function fnIsSp() {
+	var boolSp = false;
+	/*
+	// ユーザーエージェント
+	var strUserAgent = window.navigator.userAgent.toLowerCase();
+	if(strUserAgent.indexOf('ipad') != -1) {
+		return true;
+	}
+	if(strUserAgent.indexOf('ipod') != -1) {
+		return true;
+	}
+	if(strUserAgent.indexOf('iphone') != -1) {
+		return true;
+	}
+	if(strUserAgent.indexOf('android') != -1) {
+		return true;
+	}
+	return false;
+	*/
+	
+	// 画面幅
+	if($(window).width() <= 740) {
+		boolSp = true;
+		//$('meta[name=viewport]').attr('content', "width=device-width,initial-scale=1");
+	}
+	return boolSp;
+}
+
+//iOS8対応
+var glabalW = $(window).width();
+$(window).resize(function() {
+	
+	//resize処理（iOS8対応）
+	if(glabalW != $(window).width()){
+		if(fnIsSp()) {
+			//sidebar_sp();
+		}else{
+			sidebar();
+		}
+		not_top();
+	}
+	
+	//現在の幅を記憶（iOS8対応）
+	//glabalW = $(window).width();
+});
+
+//スマホ用スライドナビ
+function sidebar_sp() {
+	//$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav').css({"margin-left":$(window).width(),"width":0,"display":"none"}).attr("param","close");
+	$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav').attr("param","close");
+	$('#menu a').click(function(e){
+		e.preventDefault();
+		var strAction = $('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav').attr("param") == 'close' ? 'open' : 'close' ;
+		sidebar_sp_action(strAction);
+		return false;
+	});
+}
+var sidebarTranzaction = true;
+//サイドバー動作
+function sidebar_sp_action(action){
+	if(sidebarTranzaction === true){
+		sidebarTranzaction = false;
+
+
+		if(action == 'open'){
+			$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav').css({"display":"block"}).attr("param", "open");
+				/*.queue([]).animate({"left": 0}, "normal", function(){
+					$(this).attr("param", "open");
+					sidebarTranzaction = true;
+			});*/
+					sidebarTranzaction = true;
+
+			$('#header #headerLogo ul li#menu a').addClass('close');
+		}else{
+			$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav').css({"display":"none"}).attr("param","close");
+			/*.queue([]).animate({"left":"-90%"},"normal",function() {
+				$(this).attr("param","close");
+				sidebarTranzaction = true;
+			});*/
+				sidebarTranzaction = true;
+			//$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav')
+			$('#header #headerLogo ul li#menu a').removeClass('close');
+		}
+	}
+}
+
+//スマホ閲覧時、pcボタンをタップしたらビューポートを切り替える
+$('.pcSiteChange').click(function(){
+	//boolPcView = true;
+		$('meta[name=viewport]').attr('content', "width=1100px");
+		$('html,body').animate({scrollTop:0},1);
+		$('#sidenav:not(#sidenav.sidenav_top),#sidenav + #secCatSidenav').css({'display':'block','width':'210px','margin-left':0,'top':'-80px'});
+		/*bx-sliderの画像表示の調整*/
+		$('.bx-viewport').css({'overflow':'visible'});
+		$('.bx-wrapper').css({'overflow':'hidden'});
+		//$('.slider1').css({'-webkit-transform':'translate3d(0px, 0px, 0px)'});
+		$('.slider1').css({'transform':'translatex(0)'});
+});
+/*
+
+//縦長か横長化の判定
+var defaultOrientation; // window.orientationが0または180の時に縦長であればtrue
+
+// 初期化処理
+window.addEventListener('load', function() {
+  if('orientation' in window) {
+    var o1 = (window.innerWidth < window.innerHeight);
+    var o2 = (window.orientation % 180 == 0);
+    defaultOrientation = (o1 && o2) || !(o1 || o2);
+    checkOrientation();
+  }
+  // もしあれば、その他Webアプリの初期化処理
+}, false);
+
+// 画面回転時に向きをチェック
+window.addEventListener('resize', checkOrientation, false);
+function checkOrientation() {
+
+    // setViewport
+    spView = 'width=device-width,initial-scale=1.0';
+    tbView = 'width=1100px';
+		
+		  if('orientation' in window) {
+    // defaultOrientationがtrueの場合、window.orientationが0か180の時は縦長
+    // defaultOrientationがfalseの場合、window.orientationが-90か90の時は縦長
+    var o = (window.orientation % 180 == 0);
+    if((o && defaultOrientation) || !(o || defaultOrientation)) {
+      // ここに縦長画面への切り替え処理を記述
+      $('#container h1').css('color','red');
+			$('meta[name=viewport]').attr('content', spView);
+			//changeViewprot('smartphone');
+			//$('meta[name=viewport]').attr('content', "width=device-width");
+		}
+    else {
+      // ここに横長画面への切り替え処理を記述
+      $('#container h1').css('color','blue');
+			//$('meta[name=viewport]').attr('content', "width=1100px");
+			//changeViewprot('pc');
+			$('meta[name=viewport]').attr('content', tbView);
+			$("html,body").animate({scrollTop:0},1);
+			$('#sidenav').css({'display':'block','width':'210px','margin-left':0});
+			//$("#sidenav").children('#sidenav_copy').each(function(){
+			//	$(this).remove();
+			//});
+			//$("#sidenav").css('display', 'none');
+    }
+  }
+}*/
+
+
+//メインビジュアル：スマホ用とPC用の画像変更　⇒ テンプレートにて切替処理のため削除
+/*
+$(function(){
+	var breakPoint = 500;
+	function main_visual_img(){
+		$('#bnrHeader .slider1 img').each(function(index, element) {
+			var src = $(this).attr('src');
+			var fileType = src.match(/\.jpg|\.gif|\.png/);
+			if($(document).width() > breakPoint){
+				//PC
+				if(src.match(/_sp/)!=null){
+					$(this).attr('src', src.replace('_sp'+fileType, fileType));
+				}
+				$('.bx-viewport').css('height', 'auto');
+			}else{
+				//SP
+				if(src.match(/_sp/)==null){
+					$(this).attr('src', src.replace(fileType, '_sp'+fileType));
+				}
+				$('.bx-viewport').css('height', $(window).width()*277/640);
+			}
+		});
+	}
+	
+	$(window).resize(function(){
+		main_visual_img();
+	}).load(function(){
+		main_visual_img();
+	});
+	
+	//DEBUG
+	$('#menu a').removeAttr('href');
+});
+*/
+
+/**
+　▲ここまでスマホ対応用処理▲
+=======================================================================================*/
+
+// PC用グローバルナビメガドロップダウン
+$(function(){
+	
+	$('.slidebox').hover(function(){
+		$(".row:not(:animated)",this).css("display","block");
+		$(".row:not(:animated)",this).parent('li').addClass("current");
+	}, function(){
+		$(".row",this).css("display","none");
+		$(".row",this).parent('li').removeClass("current");
+	});
+	$('.close_btn a').click(function(){
+		$(this).parents('.row').css("display","none");
+	});
+	
+	//棋戦：カレントのリンク先に変更対応
+	$('nav li.li01 .submenu_wrap .submenu_box').each(function(){
+		$(this).remove();
+	});
+	
+	var hd_menu_url = '/match/hd_menu.html';
+	if(location.href.match(/^https:/)) {
+		hd_menu_url = 'https://www.nihonkiin.or.jp/ssl/hd_menu.php';
+	}
+	if(location.href.match(/staging/)) {
+		hd_menu_url = '/match/hd_menu.html';
+		if(location.href.match(/^https:/)) {
+			hd_menu_url = 'https://staging.nihonkiin.or.jp/ssl/hd_menu.php';
+		}
+	}
+	
+	$.ajax({
+		type: 'GET',
+		url: hd_menu_url,
+		dataType: 'html',
+		success: function(data){
+			$('nav li.li01 .submenu_wrap').append(data);
+		}
+	});
+});

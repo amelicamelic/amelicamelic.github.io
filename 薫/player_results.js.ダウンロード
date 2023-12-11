@@ -1,0 +1,96 @@
+$(function() {
+  function getJsonPath() {
+    match = document.URL.match(/ki(\d+)\.htm/);
+    return '/player_results/' + match[1] + '.json';
+  }
+
+  function renderSummary(summary) {
+    var html = [
+      '<tr>',
+        '<th>通算成績</th>',
+        '<td class="t_right">' + summary.total.whole + '</td>',
+        '<td class="t_right">' + summary.total.win + '</td>',
+        '<td class="t_right">' + summary.total.lose + '</td>',
+        '<td class="t_right">' + summary.total.jigo + '</td>',
+        '<td class="t_right">' + summary.total.no_game + '</td>',
+      '</tr>',
+      '<tr>',
+        '<th>本年成績</th>',
+        '<td class="t_right">' + summary.current_year.whole + '</td>',
+        '<td class="t_right">' + summary.current_year.win + '</td>',
+        '<td class="t_right">' + summary.current_year.lose + '</td>',
+        '<td class="t_right">' + summary.current_year.jigo + '</td>',
+        '<td class="t_right">' + summary.current_year.no_game + '</td>',
+      '</tr>',
+      '<tr>',
+        '<th>昨年成績</th>',
+        '<td class="t_right">' + summary.last_year.whole + '</td>',
+        '<td class="t_right">' + summary.last_year.win + '</td>',
+        '<td class="t_right">' + summary.last_year.lose + '</td>',
+        '<td class="t_right">' + summary.last_year.jigo + '</td>',
+        '<td class="t_right">' + summary.last_year.no_game + '</td>',
+      '</tr>',
+    ]
+    return html.join('');
+  }
+
+  function renderGames(games) {
+    var html = [];
+    games.forEach(function(game) {
+      date = game.date.replace(/\-/g, '/')
+      result = game.result && game.result.mark || ''
+      html.push('<tr>');
+      html.push('<td>' + date + '</td>');
+      html.push('<td>' + result + '</td>');
+      var opponent = '';
+      if (game.opponent && game.opponent.code) {
+        opponent = '<a href="' + playerCodeToUrl(game.opponent.code) + '">' + game.opponent.name + ' ' + game.opponent.dan + '</a>'
+      } else if (game.opponent) {
+        opponent = game.opponent.name + ' ' + game.opponent.dan
+      }
+      html.push('<td>' + opponent +'</td>');
+      var tournament = '';
+      var season = '';
+      if (game.tournament && game.tournament.path) {
+        var href = buildTournamentUrl(game.tournament.path);
+        tournament = '<a href="' + href + '">' + game.tournament.name + '</a>';
+        season = '<a href="' + href + '">' + game.season.name + '</a>';
+      } else {
+        tournament = game.tournament.name;
+        season = game.season.name;
+      }
+      html.push('<td>' + tournament + '</td>');
+      html.push('<td class="t_right">' + season + '</td>');
+      html.push('<td>' + game.stage.name + '</td>');
+      html.push('</tr>');
+    });
+    return html.join('');
+  }
+
+  function formatDate(date_str) {
+    var date = new Date(date_str);
+    return date.getFullYear()
+      + '/' + ('0' + (date.getMonth() + 1)).slice(-2)
+      + '/' + ('0' + date.getDate()).slice(-2)
+      + ' ' + ('0' + date.getHours()).slice(-2)
+      + ':' + ('0' + date.getMinutes()).slice(-2);
+  }
+
+  function playerCodeToUrl(code) {
+      return '/player/htm/ki' + ('000000' + code).slice(-6) + '.html';
+  }
+
+  function buildTournamentUrl(path) {
+    return '/match' + path + '.html';
+  }
+
+  $.getJSON(getJsonPath(), function(json) {
+    var summaryHTML = renderSummary(json.summary)
+    $('#player-summary > tbody').html(summaryHTML);
+    var gamesHTML = renderGames(json.games)
+    $('#player-games > tbody').html(gamesHTML);
+    var updatedTime = '更新日時：' + formatDate(json.updatedTime)
+    $('#player-summary > caption').html(updatedTime);
+    $('#player-games > caption').html(updatedTime);
+  });
+});
