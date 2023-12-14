@@ -234,7 +234,7 @@ nav.pc_none li a {
 /*#sidenav_sp {
 	position: absolute;
 	margin-left: -500px;
-	top: 162px;
+	top: 62px;
 	width: 90%;
 	z-index:99999;
 }
@@ -317,7 +317,7 @@ nav.pc_none li a {
 #sidenav + #secCatSidenav {
 	/*position: absolute;
 	margin-left: 500px;
-	top: 62px;
+	margin-top: 0px;
 	width: 0;
 	z-index:99999;
 	display:none;
