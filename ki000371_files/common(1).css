@@ -259,6 +259,9 @@ header nav li {
 	text-align: center;
 	letter-spacing: 2px;
 }
+nav .li01 {
+	width: 161px;
+}
 nav .li07 {
 	width: 161px;
 }
