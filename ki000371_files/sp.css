@@ -330,7 +330,7 @@ nav.pc_none li a {
 	/*left: -90%;*/
 	/*right: -90%;*/
 	position: absolute;
-	top: 162x;
+	top: 62x;
 	z-index:99999;
 }
 #sidenav.sidenav_top {/*PCのサイドバーはコンテンツの下に表示*/
@@ -340,7 +340,7 @@ nav.pc_none li a {
 	width: 100%;
 	z-index:0;
 	display:block;
-	top: 0;
+	top: 100;
 	right: 0;
 	left: 0;
 }
