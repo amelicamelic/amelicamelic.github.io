@@ -13,7 +13,7 @@ body {
 	min-width: 990px;
 	overflow-x: hidden;
 }
-/***自訂2段CSS***/ /* 自訂1-先預設是隱藏*/ .hide-in-phone{display:none} /* 自訂2-若寬度大於480px就顯示*/ @media only screen and (min-width:360px) { .hide-in-phone { display: block; } }
+/***自訂2段CSS***/ /* 自訂1-先預設是隱藏*/ .hide-in-phone{display:none} /* 自訂2-若寬度大於480px就顯示*/ @media only screen and (min-width:1660px) { .hide-in-phone { display: block; } }
 
 .inner {
 	width: 990px;
