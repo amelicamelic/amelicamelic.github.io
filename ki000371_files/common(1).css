@@ -13,6 +13,10 @@ body {
 	min-width: 990px;
 	overflow-x: hidden;
 }
+/*スマートフォン
+======================================= */
+.hide-in-phone{display:none} 
+@media only screen and (min-width:1380px) { .hide-in-phone { display: block; } }
 .inner {
 	width: 990px;
 	margin: 0 auto;/*overflow: hidden;*/
