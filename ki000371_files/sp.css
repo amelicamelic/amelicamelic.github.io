@@ -330,7 +330,7 @@ nav.pc_none li a {
 	/*left: -90%;*/
 	/*right: -90%;*/
 	position: absolute;
-	top: 62x;
+	top: 500px;
 	z-index:99999;
 }
 #sidenav.sidenav_top {/*PCのサイドバーはコンテンツの下に表示*/
@@ -409,7 +409,6 @@ nav.pc_none li a {
 }
 #sidenav .link_list {
 	margin: 0;
-	margin-top: 100px;
 }
 
 #sidenav .arch_btn {
