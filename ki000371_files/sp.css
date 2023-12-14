@@ -179,7 +179,7 @@ h2 img {
 	background-size: 39px 42px;
 	display: block;
 	height: 39px;
-	margin-top: 30px;
+	margin-top: 3px;
 	width: 42px;
 	/*cursor: pointer;*/
 }
@@ -234,7 +234,7 @@ nav.pc_none li a {
 /*#sidenav_sp {
 	position: absolute;
 	margin-left: -500px;
-	top: 62px;
+	top: 0px;
 	width: 90%;
 	z-index:99999;
 }
