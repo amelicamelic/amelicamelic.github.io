@@ -317,7 +317,7 @@ nav.pc_none li a {
 #sidenav + #secCatSidenav {
 	/*position: absolute;
 	margin-left: 500px;
-	margin-top: 0px;
+	top: 62x;
 	width: 0;
 	z-index:99999;
 	display:none;
@@ -330,7 +330,7 @@ nav.pc_none li a {
 	/*left: -90%;*/
 	/*right: -90%;*/
 	position: absolute;
-	top: 62px;
+	margin-top: 0px;
 	z-index:99999;
 }
 #sidenav.sidenav_top {/*PCのサイドバーはコンテンツの下に表示*/
