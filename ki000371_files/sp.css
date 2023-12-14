@@ -470,7 +470,7 @@ nav.pc_none li a {
 	font-weight: bold;
 	color: #000;
 	font-size: 18px;
-	background-image: url(/common/images/ico_tel.png);
+	background-image: url(	https://www.nihonkiin.or.jp/common/images/ico_tel.png);
 	background-repeat: no-repeat;
 	background-position: 10px 50%;
 }
@@ -1999,7 +1999,7 @@ ul.sub_catlist p.all_news,
 #content.books .list_itembox h2 a,
 .ebooks .books .list_itembox h2 a,
 .ebooks .books .list_itembox h2 span {
-	background-image: url(/common/images/arrow_gray.png);
+	background-image: url(	https://www.nihonkiin.or.jp/common/images/arrow_gray.png);
 	background-repeat: no-repeat;
 	background-position: 0 50%;
 	color: #00678e;
@@ -2067,7 +2067,7 @@ ul.sub_catlist p.all_news,
 	margin: 10px 0!important;
 }
 .books .list_itembox .series_link {
-	background: url(/common/images/arrow_gray.png) no-repeat 5px center;
+	background: url(	https://www.nihonkiin.or.jp/common/images/arrow_gray.png) no-repeat 5px center;
 	padding-left: 17px;
 	margin:0!important;
 }
