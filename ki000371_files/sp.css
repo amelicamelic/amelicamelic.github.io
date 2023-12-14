@@ -340,7 +340,7 @@ nav.pc_none li a {
 	width: 100%;
 	z-index:0;
 	display:block;
-	top: 10%;
+	top: 0;
 	right: 0;
 	left: 0;
 }
@@ -409,6 +409,7 @@ nav.pc_none li a {
 }
 #sidenav .link_list {
 	margin: 0;
+	margin-top: 100px;
 }
 
 #sidenav .arch_btn {
