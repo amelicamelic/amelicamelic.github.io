@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /ki000371.htm
+Disallow: /ki000377.htm
