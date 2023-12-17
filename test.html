@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>BANANA POWER</title>
+    <link rel="icon" href="./test/banana.ico">
+    <link rel="stylesheet" href="./test/style.css">
+    <meta charset="UTF-8">
+    <meta name="author" content="Tomai">
+    <mata name="viewport" content="width=device-width, initial-scale=1,0"></mata>
+</head>
+<body>
+<h1>BANANA POWER</h1>
+ 
+<div class="shuca">
+<ul>
+    <dt>yamino</dt>
+    <dt>shu</dt>
+    <dt>kaneshiro</dt>
+    <dt>luca</dt>
+</ul></div>
+  
+<div id="sample"></div>
+
+<div class="gogogo"><img src="./test/banana.png" id="icon" /></div>
+<script>
+    var icon = document.querySelector("#icon");
+
+    icon.onclick = () => {
+      document.body.classList.toggle("dark-mode");
+      if (document.body.classList.contains("dark-mode")) {
+        icon.src = "./test/banana.png";
+      } else {
+        icon.src = "./test/banana.png";
+      }
+    };
+</script>
+
+
+</body> 
+
+</html>
