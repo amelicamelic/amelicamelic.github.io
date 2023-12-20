@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+body {
+	width: 100%;
+	min-width: 990px;
+}
+
+.pc_none,
+#dLogin,
+/*#bnrHeader,
+#headerUnav,
+#headerMiddle #headerRight,
+#headerLogo ul,
+nav,
+#sidenav,*/
+#footer #goTop,
+#footer #footerBnr,
+#footer #footerSitemap,
+#footer #footerLogo,
+#footer #footerRight ul {
+	display: none
+}
+/*#headerLogo h1 img {
+	height: 35px;
+}
+#headerLogo h1 {
+	height: 45px;
+}
+#footer {
+	margin-top: 1em;
+	padding-top: 0.5em;
+	border-top: 1px solid #000;
+}*/
+/* ぱんくず
+======================================= */
+/*.breadcrumb {
+	border-top: 1px solid #000;
+}*/
+/* サイドバーの背景非表示
+======================================= */
+/*#container > .inner {
+	background-image: none;
+}*/
+/* 本文100％表示
+======================================= */
+/*#content {
+	float: none;
+	width: 100%;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.breadcrumb li {
+	display: inline;
+}
+.breadcrumb li:after {
+	content: ">";
+	margin: 0 5px;
+}
+.breadcrumb li:last-child:after {
+	display: none;
+}
+#bnrHeader {
+	display:none;
+}*/
+
+/*@import url("/common/css/reset.css");
+@import url("/common/css/common.css");
+@import url("/common/css/screen.css");
+
+@import url("/common/css/thickbox.css ");*/
+
+/* ----------------------------------------
+@import url("/common/css/common.css");
+@import url("/common/css/font.css");
+@import url("/common/css/common.css");
+@import url("/common/css/common.css");
+@import url("/common/css/common.css");
+@import url("/common/css/common.css");
+@import url("/common/css/common.css");
+@import url("/common/css/common.css");
+@import url("/common/css/common.css");
+@import url("/common/css/common.css");
+@import url("/common/css/style.css");
+----------------------------------------- */
+
+#content h2 {
+	clear: both;
+}
+.player .ul_players {
+	overflow: inherit;
+}
+.player .ul_players, .player .ul_players li {
+	page-break-inside: avoid;
+}
+#sub_player dl, #countryside dl {
+	page-break-inside: avoid;
+}

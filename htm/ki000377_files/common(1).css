@@ -1,0 +1,2124 @@
+@charset "UTF-8";
+
+@media screen and (min-width: 741px),print {/*pc用スタイル*/
+/* ----------------------------------------
+ * 共通
+ * ---------------------------------------- */
+body {
+	color: #595959;
+	font-size: 14px;/*font.css*/
+	font-family: "Lucida Grande", 'メイリオ', Meiryo, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', Osaka, sans-serif, 'ＭＳ Ｐゴシック', "MS PGothic";
+	line-height: 2;
+	width: 100%;
+	min-width: 990px;
+	overflow-x: hidden;
+}
+.inner {
+	width: 990px;
+	margin: 0 auto;/*overflow: hidden;*/
+}
+a {
+	text-decoration: none;
+	color: #00678C;
+	outline: none;
+}
+a:hover {
+	text-decoration: underline;
+	color: #F22488;
+}
+a.link {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png);
+	background-position: 0px .5em;
+	background-repeat: no-repeat;
+	padding-left: 13px;
+}
+a.link[target="_blank"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png), url(https://www.nihonkiin.or.jp/common/images/ico_extlink.png);
+	background-position: 0px .5em, 100% 50%;
+	background-repeat: no-repeat;
+	padding-left: 13px;
+	padding-right: 18px;
+}
+iframe {
+	vertical-align: bottom;
+}
+iframe body {
+	background: none;
+}
+em {
+	font-weight: bold;
+}
+.pc_none {
+	display:none!important;
+}
+/* clearfix
+======================================= */
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: block;
+	overflow: hidden!important;
+}
+.clearfix:after {
+	clear: both;
+}
+.clear_both {
+	clear: both;
+}
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+	zoom: 1;
+}
+/* ヘッダー
+======================================= */
+header {
+	font-size: 12px;
+}
+header ul {
+	overflow: hidden;
+}
+header ul li,
+header h1,
+header p,
+header input {
+	float: left;
+}
+header a {
+	color: #535353;
+}
+header a:hover {
+	text-decoration: none;
+}
+#headerLogo li a,
+#ulSnav a {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_black.png);
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	padding-left: 10px;
+	margin-left: 16px;
+}
+#headerUnav {
+	background-color: #1e6bb3;
+}
+#headerMiddle {
+	overflow: hidden;
+	height: 90px;
+}
+#headerLogo {
+	float: left;
+	padding: 12px 0 13px;
+	line-height: 65px;
+	overflow: hidden;
+}
+#headerLogo h1 {
+	margin-right: 12px;
+}
+#headerLogo ul {
+	overflow: hidden;
+	width: 24em;
+	margin-top: 15px;
+	float: left;
+}
+#headerLogo li {
+	line-height: 2;
+}
+#headerRight {
+	float: right;
+	padding-top: 13px;
+	overflow: hidden;
+}
+#ulSnav {
+	float: right;
+	margin-bottom: 9px;
+}
+#fontSize {
+	clear: both;
+	float: left;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/fontSize.png);
+	background-repeat: no-repeat;
+	width: 156px;
+	height: 25px;
+}
+#fontSize dt {
+	display: none;
+}
+#fontSize dd {
+	float: right;
+	overflow: hidden;
+	text-indent: -1500em;
+}
+#fontSize a {
+	display: block;
+}
+#fontM a {
+	height: 25px;
+	width: 47px;
+}
+#fontL a {
+	height: 25px;
+	width: 46px;
+}
+#headerSearch {
+	width: 233px;
+	float: right;
+	margin-left: 23px;
+}
+#headerSearch input[type="text"] {
+	width: 140px;
+	height: 23px;
+	border: 1px solid #ccc;
+	/*color: #999;*/
+	padding: 0;
+}
+#headerSearch .dSearch {
+	background: url(https://www.nihonkiin.or.jp/common/images/btn_search_on.png) no-repeat 0 0;
+	float: left;
+	height: 25px;
+	width: 57px;
+}
+#headerSearch .dSearch input:hover {
+	opacity: 0;
+}
+header nav {
+	background-color: #1e6bb3;
+}
+#home header nav {
+	margin-bottom: 4px;
+}
+/*　ログイン
+======================================= */
+#dLogin {
+	border: 1px solid #bbb;
+	background-color: #fff;
+	position: absolute;
+	/*display:none;*/
+	top: 30px;
+	right: 50%;
+	margin-right: -495px;
+	width: 226px;
+	z-index: 100;
+	display: none;
+}
+#dLogin a {
+	color: #00678C;
+}
+#dLogin a:hover {
+	color: #F22488;
+}
+#dLogin p {
+	padding: 1em 1em 0;
+	float: none;
+}
+#dLogin p {
+	padding: 1em 1em 0;
+	float: none;
+}
+#dLogin p span {
+	color: #00678C;
+}
+#dLogin ul {
+	height: auto;
+}
+#dLogin li {
+	border-top: 1px dotted #bbb;
+	color: #00678C;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png);
+	background-repeat: no-repeat;
+	background-position: 20px 1em;
+	padding: .5em .5em .5em 33px;
+	line-height: 1.6;
+	float: none;
+}
+#dLogin .li_no_bdr {
+	border-top: none;
+}
+#dLogin .li_login {
+	background-image: none;
+	padding: 1em;
+}
+#dLogin .li_login a {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_blue.png);
+	background-repeat: no-repeat;
+	background-color: #E0EAF6;
+	background-position: 13px 50%;
+	border: 1px solid #98B9DC;
+	padding: .5em .5em .5em 30px;
+	display: block;
+}
+#dLogin li a[target="_blank"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_extlink.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding-right: 18px;
+}
+/*　グローバルナビ
+======================================= */
+header nav li {
+	border-left: 1px solid #999999;
+	display: inline-table;
+	text-align: center;
+	letter-spacing: 2px;
+}
+nav .li01 {
+	width: 161px;
+}
+nav .li02 {
+	width: 161px;
+}
+nav .li03 {
+	width: 179px;
+}
+nav .li04 {
+	width: 160px;
+}
+nav .li05 {
+	width: 161px;
+}
+nav .li06 {
+	border-right: 1px solid #999999;
+	width: 162px;
+}
+header nav li:hover {
+	/*background-color: #EBF2F8;*/
+}
+header nav li a {
+	color: #FFFFFF;
+	display: table-cell;
+	font-size: 16px;
+	font-weight: bold;
+	height: 47px;
+	vertical-align: middle;
+	width: 100%;
+}
+header nav li a:hover {
+	text-decoration: none;
+}
+
+/*　グローバルナビ・プルダウン
+======================================= */
+.row{
+	position: absolute;
+	top: 167px;
+	left: 0;
+	/*display: none;*/
+	z-index: 99999;
+	height: auto;
+	display: none;
+	background-color:#D9E6F6;
+	padding: 22px 0 0 0;
+	width: 100%;
+}
+
+.submenu_wrap{
+	width: 990px;
+	margin: 0 auto;
+}
+
+.submenu_wrap ul li{
+	float: none;
+	display: block !important;
+	text-align: left;
+	position: relative;
+	border-left: none;
+}
+
+.submenu_wrap ul li a{
+	color:#016891;
+	display: block !important;
+	height: 25px;
+	font-weight:normal;
+	font-size: 14px;
+	letter-spacing: 0;
+}
+
+.submenu_wrap ul li :hover{
+	color: #F10072;
+	text-decoration: underline;
+}
+
+.submenu_wrap ul li:hover {
+	background-color: #D9E6F6;
+}
+
+.submenu_box{
+	float: left;
+	width: 173px;
+    padding-right: 30px;
+}
+
+.wide{
+	width: 200px;
+}
+
+.submenu_box h4, .submenu_box .point-text {
+	color:#016891;
+	font-weight:bold;
+	font-size: 16px;
+	border-bottom: 1px dotted #006792;
+	margin-bottom: 8px;
+	text-align: left;
+}
+
+.submenu_box h4 a,.point-text a{
+	color:#016891 !important;
+	font-weight:bold !important;
+	font-size: 16px !important;
+
+}
+
+.submenu_box .point-text a {
+	height: inherit;
+}
+
+.submenu_box h4 a:hover,
+.point-text a:hover,
+.submenu_wrap h3 a:hover{
+	color: #F10072 !important;
+}
+
+.submenu_wrap .last-child{
+	padding-right:0px;
+}
+
+.submenu_wrap h3{
+	font-size: 16px;
+	font-weight: normal;
+	margin-bottom: 15px;
+	height: 33px;
+	text-align: left;
+}
+
+.submenu_wrap h3 span.first-child{
+	background-color: #4587C4;
+	display: inline-block;
+	line-height: 33px;
+	padding-right: 25px;
+	margin-right: 15px;
+}
+
+.submenu_wrap h3 span a{
+	background-color: #4587C4;
+	color: #FFFFFF;
+	font-size: 17px;
+	font-weight:bold;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_footer_bottom.png);
+	background-position: 15px 49%;
+	background-repeat: no-repeat;
+	line-height: 33px;
+	padding-left: 35px;
+}
+
+.submenu_wrap h3 span a:hover{
+	text-decoration: underline;
+}
+
+.submenu_ttl_bg{
+	background-color: #FFFFFF;
+}
+
+.close_btn{
+	margin-top: 10px;
+}
+
+.close_btn a{
+	text-align: center;
+	padding: 2px 0;
+	background-color:#C7D9F1;
+	color:#006792;
+	font-size: 15px;
+	display: block;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/close_btn.jpg);
+	background-position: 46% 49%;
+	background-repeat: no-repeat;
+	width: 990px;
+	margin: 0 auto;
+	line-height: 49px;
+}
+
+.close_btn a:hover{
+	color: #F10072;
+}
+
+.current {
+	background-color: #EBF2F8;
+}
+
+.current a span{
+	color: #F22488;
+}
+
+.submenu_wrap .link_list a{
+	padding-left: 5px;
+}
+
+.submenu_wrap .link_list02 a:before{
+	content: " ";
+}
+
+.submenu_wrap .link_list02 a:after{
+	content: url("https://www.nihonkiin.or.jp/common/images/ico_extlink.png");
+	margin-left: 5px;
+}
+
+header nav li .submenu_wrap a{
+	display: inline !important;
+}
+
+.submenu_wrap a{
+	background-color: none !important;
+}
+
+/* サイドナビ
+======================================= */
+#sidenav h2 {
+	background-color: #0052A6;
+	font-size: 16px;/*font.css*/
+	font-weight: normal;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+	margin-bottom: 0;
+}
+#sidenav h2 a {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_white.gif);
+	background-position: 13px 1.1em;
+	background-repeat: no-repeat;
+	color: #fff;
+	padding: 5px 0 5px 26px;
+	display: block;
+	background-color: #0052A6;
+}
+#sidenav h2 a:hover {
+	background-color: #F10072;
+	text-decoration: none;
+	color: #fff;
+}
+#sidenav h2 a.line_h150 {
+	background-position: 13px 0.8em;
+}
+#sidenav h2 span {
+	padding: 5px 0 5px 13px;
+	display: block;
+}
+#sidenav h3 {
+	background-color: #EFF4FA;
+	font-size: 13px;/*font.css*/
+	color: #404040;
+	padding-left: 13px;
+	border-bottom: 1px dotted #595959;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_list01.png);
+	background-position: .8em 1.3em;
+	background-repeat: no-repeat;
+	padding: .5em .5em .5em 1.8em;
+}
+#sidenav ul {
+	padding: 10px 0;
+	background-color: #EFF4FA;
+}
+#sidenav ul ul {
+	padding: 0;/*margin-left: -28px;*/
+}
+#sidenav li {
+	position: relative;
+}
+#sidenav li a,
+#sidenav li span {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png);
+	background-position: 15px .9em;/*font.css*/
+	background-repeat: no-repeat;
+	color: #00678C;
+	display: block;
+	padding: 0 1em 0 28px;
+}
+#sidenav li ul li a {
+	padding-left: 40px;
+}
+#sidenav li li a {
+	/*padding-left: 40px;*/
+	background-position: 25px .9em;
+}
+#sidenav li:hover {
+	text-decoration: none;
+}
+#sidenav li a:hover {
+	color: #F10072;
+	text-decoration: none;
+	background-color: #fff;
+}
+#sidenav li a[target="_blank"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png)!important;
+	background-position: 15px .9em!important;
+	background-repeat: no-repeat;
+	color: #00678C;
+	display: block;
+	padding: 0 0 0 28px!important;
+}
+#sidenav li a[target="_blank"]:after {
+	content: url(https://www.nihonkiin.or.jp/common/images/ico_extlink.png);
+	padding-left: .3em;
+}
+#sidenav p {
+	background-color: #EFF4FA;
+	padding: 10px 20px 0;
+}
+#sidenav.news_side li a[target="_blank"]:after {
+	content: "";
+}
+#sidenav .arch_btn {
+	display: block;
+	height: 13px;
+	position: absolute;
+	width: 13px;
+	top: .5em;
+	left: 6em;
+	color: transparent;
+	padding: 0;
+}
+#sidenav .arch_btn img {
+	vertical-align: top;
+}
+#sidenav .lst_m {
+	background-color: #fff;
+	margin: 0 1em;
+	overflow: hidden;
+}
+#sidenav .lst_m li {
+	float: left;
+	width: 50%;
+}
+/* フッター
+======================================= */
+footer {
+	background-color: #EBF2F8;
+	position: relative;
+}
+footer ul {
+	overflow: hidden;
+}
+footer li {
+	float: left;
+}
+/* footerSitemap */
+#footerSitemap,
+.footerSitemap {
+	width: 990px;
+	margin: 0 auto;
+	padding-bottom: 27px;
+}
+#footerSitemap li,
+.footerSitemap li {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_black.png);
+	background-position: 0 .7em;
+	background-repeat: no-repeat;
+	padding-left: 13px;
+	margin: 0 30px 14px 0;
+	float:left;
+}
+#footerSitemap li a,
+.footerSitemap li a {
+	color: #333;
+}
+#footerSitemap li a:hover,
+.footerSitemap li a:hover {
+	color: #F10072;
+}
+#footerSitemap li a[target="_blank"],
+.footerSitemap li a[target="_blank"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_extlink.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding-right: 18px;
+}
+#footerSitemap li ul,
+.footerSitemap li ul {
+	margin-left: -20px;
+}
+#footerSitemap li li,
+.footerSitemap li li {
+	line-height: 16px;/*font.css*/
+	font-size: 12px;/*font.css*/
+	background-image: none;
+	border-left: 1px dotted #808080;
+	padding: 0 20px;
+	margin: 0 0 .5em;
+}
+/* footerBottom */
+#footerBottom {
+	overflow: hidden;
+	background-color: #0056A2;
+	font-size: 12px;/*font.css*/
+}
+#footerLogo {
+	float: left;
+	padding: 14px 0 18px;
+	width: 162px;
+}
+#footerRight {
+	float: right;
+	padding-top: 25px;
+	text-align: right;
+}
+#footerRight li {
+	margin-left: 16px;
+}
+#footerRight li a {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_footer_bottom.png);
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	padding-left: 10px;
+	color: #fff;
+}
+#footerRight .copyright {
+	color: #99BBDA;
+}
+/*トップに戻るボタン*/
+#goTop a {
+	position: fixed;
+	width: 63px;
+	height: 63px;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/gotop.png);
+	background-repeat: no-repeat;
+	bottom: 100px;
+	right: 10px;
+	display: block;
+	z-index:10000;
+}
+#goTop a:hover {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/gotop_on.png);
+}
+/**
+　バナー
+==================================================*/
+/*メインバナー・カテゴリトップ共通*/
+#bnrHeader {
+	background: url(/common/images/mainvisual_bg.gif) repeat left top;
+	position: relative;
+}
+#bnrHeader .inner,
+#bnrHeader .bx-wrapper {
+ 	height:270px;
+}
+#bnrHeader .slider1 {
+	height: 270px;
+	overflow:hidden;
+	/*-webkit-transform: translatex(0);
+	-moz-transform: translatex(0);
+	-ms-transform: translatex(0);
+	-o-transform: translatex(0);
+	transform: translatex(0);*/
+}
+#bnrHeader .slider1 li {/*スマホからPC表示に切り替えた時にstyle属性で上書きされている要素を打ち消す*/
+	width:990px!important;
+}
+
+/* サイドバナー（とりあえずトップページのみ） */
+#bnrHeaderSide {
+	position: absolute;
+	top: -166px;
+	width: 100%;
+}
+#bnrHeaderSide li.first-child {
+	position: absolute;
+	left: 50%;
+	margin-left: -672px;
+	top: 0;
+}
+#bnrHeaderSide li.last-child {
+	position: absolute;
+	right: 50%;
+	margin-right: -672px;
+	top: 0;
+}
+#bnrHeader .ul_link_buttons {
+	overflow: hidden;
+	width: 990px;
+	margin: 0 auto;
+	padding: 10px 0 20px;
+}
+#bnrHeader .ul_link_buttons li {
+	float: left;
+	margin-left: 10px;
+}
+#bnrHeader .ul_link_buttons li.first-child {
+	margin-left: 0;
+}
+/* フッターバナー */
+#footerBnr {
+	margin: 0 auto;
+	padding: 23px 0px;
+	width: 990px;
+}
+/*bxslider*/
+.bx-wrapper {
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+ *zoom: 1;
+}
+.bx-wrapper img {
+	/*max-width: 100%;
+	width:100%;
+	height:auto;*/
+	display: block;
+}
+.bx-wrapper .bx-viewport {
+	/*fix other elements on the page moving (on Chrome)*/
+	-webkit-transform: translatez(0);
+	-moz-transform: translatez(0);
+	-ms-transform: translatez(0);
+	-o-transform: translatez(0);
+	transform: translatez(0);
+	/*overflow:visible!important;*/
+}
+.bx-wrapper .bx-pager,
+.bx-wrapper .bx-controls-auto {
+	position: absolute;
+	bottom: 0;
+	right: 13px;
+}
+/* LOADER */
+.bx-wrapper .bx-loading {
+	min-height: 50px;
+	background: url(https://www.nihonkiin.or.jp/common/images/bx_loader.gif) center center no-repeat #fff;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2000;
+}
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.bx-wrapper .bx-prev {
+	left: 0;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/slider1_arrow_l.gif);
+}
+.bx-wrapper .bx-next {
+	right: 0;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/slider1_arrow_r.gif);
+}
+#footerBnr .bx-wrapper .bx-prev {
+	left: -38px;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/slider2_arrow_l.gif);
+}
+#footerBnr .bx-wrapper .bx-next {
+	right: -38px;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/slider2_arrow_r.gif);
+}
+.bx-wrapper .bx-controls-direction a {
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 50%;
+	margin-top: -15px;
+	outline: 0;
+	width: 28px;
+	height: 30px;
+	text-indent: -9999px;
+	z-index: 9999;
+}
+#footerBnr .bx-wrapper .bx-controls-direction a {
+	margin-top: 0;
+	top: 0;
+	width: 13px;
+	height: 60px;
+}
+/* PAGER */
+.bx-wrapper .bx-pager .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+	display: inline-block;
+ *zoom: 1;
+ *display: inline;
+}
+.bx-wrapper .bx-pager.bx-default-pager a {
+	background: #E6E6E6;
+	border: 1px solid #fff;
+	text-indent: -9999px;
+	display: block;
+	width: 8px;
+	height: 8px;
+	margin: 0 3px;
+	outline: 0;
+}
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #AB0058;
+}
+/* ぱんくず
+======================================= */
+.breadcrumb {
+	clear: both;
+	height: 31px;
+	line-height: 31px;
+	font-size: 11px;/*font.css*/
+	color: #666;
+}
+.breadcrumb li {
+	display: inline;
+}
+.breadcrumb li:after {
+	content: ">";
+	margin: 0 5px;
+}
+.breadcrumb li.last-child:after {
+	display: none;
+}
+.breadcrumb li a {
+	color: #00668C;
+}
+/* ベースレイアウト
+======================================= */
+#container {
+	overflow: hidden;
+	padding-bottom: 40px;
+	position: relative;
+}
+#content {
+	width: 736px;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+#container > .inner {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/bg_container_inner.gif);
+	background-repeat: repeat-y;
+	background-position: 100% 0;
+}
+#container.sisetsu_top > .inner,
+#container.sisetsu_each_top > .inner,
+#container.event_top > .inner,
+#container.profile_top,
+#container.archive > .inner,
+#container.news6_top > .inner,
+#container.teach_top > .inner,
+#container.member_top > .inner,
+#container.player_top > .inner,
+#container.match_top > .inner,
+#container.profile_top > .inner,
+#container.publishing_top > .inner,
+#container.full > .inner {
+	background-image: none;
+}
+#container > .inner:before,
+#container > .inner:after {
+	content: "";
+	display: block;
+	overflow: hidden!important;
+}
+#container > .inner:after {
+	clear: both;
+}
+.sisetsu_each_top > .inner,
+.event_top > .inner,
+.profile_top > .inner,
+.archive > .inner,
+.news6_top > .inner,
+.teach_top > .inner {
+	overflow: hidden;
+}
+.full #content {
+	width: 100%;
+}
+section {
+	margin-bottom: 2em;
+}
+#sidenav {
+	float: right;
+	position: relative;
+	width: 210px;
+}
+/* 見出し
+======================================= */
+#container .h1_wrapper {
+	background-color: #EBF2F8;
+	margin-bottom: 20px;
+	position: relative;
+	z-index: 0;
+}
+#container h1 {
+	color: #000;
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+	font-size: 23px;
+	line-height: 40px;
+	width: 736px;
+	margin: 0 auto;
+	padding: 10px 254px 10px 0;
+}
+#container h1 span {
+	font-size: 18px;
+	padding-left: 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#content h2,#contactform h2 {
+	font-size: 24px;
+	color: #000;
+	border-bottom: 2px solid;
+	margin-bottom: 15px;
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+}
+
+
+
+#content h3 {
+	font-size: 20px;
+	color: #000;
+	margin-bottom: 2px;
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+}
+#content h4 {
+	font-size: 16px;/*font.css*/
+	color: #000;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/bg_h4.gif);
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	margin-bottom: 6px;
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+}
+#content p {
+	margin-bottom: 1em;
+}
+#content li p {
+	margin-bottom: 0;
+}
+#content .lead {
+	font-weight: bold;
+	font-size: 16px;/*font.css*/
+	color: #000;
+}
+/* 注意
+======================================= */
+p.attention {
+	margin-bottom: 5px;
+	padding-left: 1.5em;
+	text-indent: -1.5em;
+}
+p.attention span,
+span.attention {
+	color: #f06;
+	padding-right: 0.5em;
+}
+/* リストマークなし
+======================================= */
+.no_list li {
+	padding-left: 15px;
+}
+/* リストマークなし
+======================================= */
+.no_list_flat li {
+	padding-left: 15px;
+	display: inline-block;
+}
+/* 
+======================================= */
+.link_flat li {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png);
+	background-position: 10px .7em;
+	background-repeat: no-repeat;
+	padding: 0 10px 0 23px;
+	line-height: 2.2;
+	display: inline-block;
+}
+/* ページ内リンク
+======================================= */
+.ul_pagelink {
+	overflow: hidden;
+}
+.ul_pagelink li {
+	width: 25%;/*デフォルト4分割*/
+	float: left;
+	margin-bottom: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-left: 1px solid #ccc;
+}
+/*.ul_pagelink.div2 li {
+	width: 50%;
+}
+.ul_pagelink.div3 li {
+	width: 33.33%;
+}
+.ul_pagelink.div5 li {
+	width: 20%;
+}*/
+.ul_pagelink a {
+	display: block;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray_down.gif);
+	background-position: 16px .8em;
+	background-repeat: no-repeat;
+	padding: 0 10px 0 35px;
+	line-height: 1.8;
+}
+.ul_pagelink .li_end,
+.ul_pagelink li.last-child {
+	border-right: 1px solid #ccc;
+}
+.ul_pagelink a:hover {
+	color: #00678C;
+	background-color: #d2dff2;
+	text-decoration: none;
+}
+/* リンクリスト
+======================================= */
+.link_list li,
+.link {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png);
+	background-position: 10px .7em;
+	background-repeat: no-repeat;
+	padding-left: 23px;
+	line-height: 2.2;
+}
+#sidenav li a[target="_blank"],
+.link_list a[target="_blank"],
+a.blank {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_extlink.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding-right: 16px;
+}
+#sidenav li a[href$=".pdf"],
+.link_list a[href$=".pdf"],
+a.pdf[href$=".pdf"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_pdf.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding-right: 44px;
+}
+
+/*↓aの親タグにclass="link"をつける　下記記述は使用箇所のマークアップを変更後、削除
+a.link[href$=".pdf"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png), url(https://www.nihonkiin.or.jp/common/images/ico_pdf.png) !important;
+	background-position: 0px .5em, 100% 50%;
+	background-repeat: no-repeat;
+	padding-left: 13px;
+	padding-right: 48px!important;
+}*/
+.link_list a[href$=".xlsx"],
+.link_list a[href$=".xls"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_excel.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding-right: 52px;
+}
+.link_list a[href$=".docx"],
+.link_list a[href$=".doc"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_word.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding-right: 52px;
+}
+.link_list a[href ^="mailto:"] {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_mail.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	padding-right: 16px;
+}
+/* リスト
+======================================= */
+.number_list,
+.list {
+	line-height: 2.2;
+}
+/*箇条書きリスト*/
+.list li {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_list01.png);
+	background-position: 15px .8em;
+	background-repeat: no-repeat;
+	padding-left: 30px;
+}
+.list li li {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/ico_list02.png);
+	background-position: 7px .8em;
+	padding-left: 21px;
+}
+/*番号リスト*/
+.number_list {
+	margin-left: 1.2em;
+}
+.number_list li {
+	list-style-type: decimal;
+	list-style-position: inside;
+	padding-left: 1.5em;
+	text-indent: -1.5em;
+}
+.number_list li li {
+	padding-left: 20px;/*list-style-type: none;*/
+}
+.number_list h3 {
+	display: inline;
+}
+/*明朝体の番号見出し付きリスト*/
+.h_list {
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+	font-weight: bold;
+	color: #000;
+}
+.h_list span {
+	color: #595959;
+	font-family: "Lucida Grande", 'メイリオ', Meiryo, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', Osaka, sans-serif, 'ＭＳ Ｐゴシック', "MS PGothic";
+	font-weight: normal;
+}
+/* 特殊リスト
+======================================= */
+.ul_page_nav {
+	padding-top: 20px;
+	overflow: hidden;
+}
+.ul_page_nav li {
+	float: left;
+}
+.ul_page_nav .li_next {
+	float: right;
+}
+.ul_page_nav li a {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_black_l.png);
+	background-position: 10px 50%;
+	background-repeat: no-repeat;
+	background-color: #EFF4FA;
+	padding: 8px 13px 8px 25px;
+	display: block;
+}
+.ul_page_nav .li_next a {
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_black.png);
+	background-position: 90% 50%;
+	padding: 8px 25px 8px 13px;
+}
+/* 字下げ
+/player/national/report_2014houshin.html
+*/
+/*ul.list_em3 {
+	margin-left: 3.2em;
+}*/
+ul.list_em3 li {
+	list-style: none;
+	/*text-indent: -3.2em;
+	padding-left: 3.2em;*/
+	text-indent: -3em;
+	padding-left: 3em;
+}
+/*ul.list_em2 {
+	margin-left: 2.2em;
+}*/
+ul.list_em2 li {
+	list-style: none;
+	/*text-indent: -2.2em;
+	padding-left: 2.2em;*/
+	text-indent: -2em;
+	padding-left: 2em;
+}
+.number_list li table,
+.list_em3 li table,
+.list_em2 li table {
+	text-indent: 0;
+}
+/* 定義リスト
+======================================= */
+.dl_def {
+	padding-top: 7px;
+}
+.dl_def dt {
+	color: #000;
+	font-size: 16px;/*font.css*/
+	padding-left: 11px;
+	font-weight: bold;
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+	border-left: 3px solid;
+	line-height: 1;
+	margin-bottom: .5em;
+}
+.dl_def dd {
+	margin: 0 0 20px 15px;
+}
+.dl_flo {
+	padding-top: 7px;
+}
+.dl_flo dt {
+	color: #000;
+	font-size: 16px;/*font.css*/
+	padding-left: 11px;
+	font-weight: bold;
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+	border-left: 3px solid;
+	line-height: 1;
+	margin-bottom: .5em;
+	float: left;
+	width: 6em;
+	clear: left;
+}
+.dl_flo dd {
+	margin: -.3em 0 .5em 8em;
+	;
+}
+/* テーブル
+======================================= */
+/*table th,
+table td {
+	text-align: left;
+	padding: 7px 12px;
+}
+table th {
+	font-weight: bold;
+}*/
+.entry_body table th,
+.entry_body table td {
+	vertical-align: top;
+}
+
+table caption {
+	text-align: left;
+}
+/* 横幅を100%にしない */
+table.fit {
+	width: auto!important;
+}
+table.fit th,
+table.fit td {
+	padding: 7px 2em;
+}
+/* テーブル1 */
+.table1 {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 6px;
+	margin: -6px 0 1em -6px;
+}
+.table1 th,
+.table1 td {
+	padding: 7px 12px 1px;
+	text-align: left;
+}
+.table1 th {
+	font-weight: bold;
+	border-top: 1px solid #666;
+	color: #4C4C4C;
+	background-color: transparent;
+	border-width: 1px 0 0 0;
+}
+/*
+.table1 tr.last-child th {
+	border-bottom: 1px solid #666;
+}
+*/
+.table1 tr th.last,
+.table1 tr.last-child th {
+	border-bottom: 1px solid #666;
+}
+.table1 td {
+	border-top: 1px solid #D9D9D9;
+	border-width: 1px 0 0 0;
+}
+/*
+.table1 tr.last-child td {
+	border-bottom: 1px solid #D9D9D9;
+}
+*/
+.table1 tr td.last,
+.table1 tr.last-child td {
+	border-bottom: 1px solid #D9D9D9;
+}
+/* テーブル1 定義リスト内で使用 */
+dl.table1 dt {
+	border-top: 1px solid #666;
+	color: #4C4C4C;
+	clear: left;
+	float: left;
+	margin-right: 6px;
+	white-space: nowrap;
+}
+dl.table1 dd {
+	border-top: 1px solid #D9D9D9;
+}
+/* テーブル2 */
+.table2 {
+	width: 100%;
+	border: 1px solid #D1DCE8;
+	border-width: 1px 0 0 1px;
+	margin-bottom: 1em;
+}
+.table2 th,
+.table2 td {
+	border: solid #D1DCE8;
+	border-width: 0 1px 1px 0;
+	padding: 7px 12px;
+}
+.table2 th {
+	font-weight: bold;
+	background-color: #dfeaf5;
+	color: #4C4C4C;
+	text-align: center;
+}
+.table2 .th_pale {
+	background-color: #ebf2f8;
+}
+.table2 td {
+	background: #fff;
+}
+/* テーブル3 */
+.table3 {
+	width: 100%;
+	border: 1px solid #D1DCE8;
+	border-width: 1px 0 0 1px;
+	margin-bottom: 1em;
+}
+.table3 th {
+	text-align: center;
+	font-weight: normal;
+}
+.table3 th,
+.table3 td {
+	border: solid #D1DCE8;
+	border-width: 0 1px 1px 0;
+	padding: 7px 12px;
+}
+/* セル等幅 */
+.table1_1 {
+	table-layout: fixed;
+}
+/*セル幅1:2*/
+.table1_2 td {
+	width: 66%;
+}
+/*セル幅1:2:2*/
+.table1_2_2 td {
+	width: 40%;
+}
+/*セル幅1:3:3:3*/
+.table1_3_3_3 td {
+	width: 30%;
+}
+/*セル幅1:3*/
+.table1_3 td {
+	width: 75%;
+}
+/*セル幅2:1:2*/
+.table2_1_2 .left_cell,
+.table2_1_2 .left_cell {
+	width: 40%;
+}
+/*セル幅3:1*/
+.table3_1 .left_cell {
+	width: 75%;
+}
+/*セル幅2:3*/
+.table2_3 .left_cell {
+	width: 40%;
+}
+/*パディング変更*/
+.padding_none th,
+.padding_none td {
+	padding: 0px 12px!important;
+}
+/*テーブル関係の汎用クラス*/
+.table_p3 th,
+.table_p3 td {
+	padding: 3px !important;
+}
+.table_t_center th,
+.table_t_center td {
+	text-align: center;
+}
+.table_v_center th,
+.table_v_center td {
+	vertical-align: middle;
+}
+.table_tv_center th,
+.table_tv_center td {
+	text-align: center;
+	vertical-align: middle;
+}
+table.v_top td,table.v_top th {
+	vertical-align: top;
+}
+table tr.bdn th,
+table tr.bdn td {
+	border-bottom: none;
+}
+
+.entry_body table.table_v_center th,
+.entry_body table.table_v_center td {
+	vertical-align: middle;
+}
+.entry_body table.table_tv_center th,
+.entry_body table.table_tv_center td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* レイアウトパターン
+======================================= */
+.column1,
+.column1_1,
+.column2_1,
+.column1_2,
+.column1_1_1,
+.column3_1,
+.column1_3,
+.column1_1_1_1 {
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+figcaption {
+	margin-top: 0.3em;
+}
+.column1_1 {
+	margin-left: -26px;
+}
+.column1_1 .col {
+	width: 355px;
+	float: left;
+	margin-left: 26px;
+}
+/*.column2_1 div {
+	float: left;
+	margin-right: 264px;
+}
+.column2_1 figure {
+	float: right;
+	margin-left: -264px;
+}
+.column1_2 div {
+	margin-left: 264px;
+}
+.column1_2 figure {
+	float: left;
+	margin-right: -264px;
+}*/
+
+.column2_1 .colL {
+	float: left;
+	width: 472px;
+}
+.column2_1 .colR {
+	float: right;
+	width: 228px;
+}
+.column1_2 .colL {
+	float: left;
+	width: 228px;
+}
+.column1_2 .colR {
+	float: right;
+	width: 472px;
+}
+.column1_1_1 {
+	margin-left: -26px;
+}
+.column1_1_1 .col {
+	width: 228px;
+	float: left;
+	margin-left: 26px;
+}
+.column3_1 .colL {
+	float: left;
+	width: 545px;
+}
+.column3_1 .colR {
+	float: right;
+	width: 163px;
+}
+.column1_3 .colL {
+	float: left;
+	width: 163px;
+}
+.column1_3 .colR {
+	float: right;
+	width: 545px;
+}
+
+.column1_1_1_1 {
+	margin-left: -28px;
+}
+.column1_1_1_1 .col {
+	width: 163px;
+	float: left;
+	margin-left: 28px;
+}
+/* 85px の写真の入るパターン
+======================================= */
+.column85px,.column120px {
+	margin-left: -26px;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+.column85px .col {
+	width: 621px;
+	float: left;
+	margin-left: 26px;
+}
+.column85px .figure,
+.column85px figure {
+	width: 85px;
+	float: left;
+	margin-left: 26px;
+}
+.column85px figure img,
+.column120px figure img {
+	max-width: 100%;
+}
+/* 120px の写真の入るパターン
+======================================= */
+.column120px .col {
+	width: 590px;
+	float: left;
+	margin-left: 26px;
+}
+.column120px .figure,
+.column120px figure {
+	width: 120px;
+	padding-left: 26px;
+	overflow: hidden;
+	text-align: center;
+}
+
+
+/* 120px の写真の並ぶパターン
+======================================= */
+.fig120px{
+	clear: both;
+	overflow: hidden!important;
+	margin-left: -12.5px;
+	table-layout: fixed;
+	display: table;
+	width: auto;
+}
+.fig120px.t_center{
+margin:0 auto;
+}
+.fig120px figure{
+	padding-top: 5px;
+	width: 145px;
+	text-align: center;
+	display: table-cell;
+}
+
+/* 写真右寄せ（スマホは上表示）パターン
+======================================= */
+.imgclm_rt {
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+.imgclm_rt figure {
+	float: right;
+	padding-left: 0.5em;
+	text-align: center;
+}
+
+/* 写真左寄せ（スマホは上表示）パターン
+======================================= */
+.imgclm_lt {
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+.imgclm_lt figure {
+	float: left;
+	padding-right: 0.5em;
+	text-align: center;
+}
+
+/* 問い合わせパターン
+======================================= */
+#content .d_contact {
+	border: 2px solid #497fbd;
+	padding: 0 20px 10px;
+	line-height: 1.5;
+	margin-bottom: 1em;
+}
+#content .d_contact h2 {
+	background-color: #497fbd;
+	color: #fff;
+	padding: 10px 15px;
+	font-size: 18px;/*font.css*/
+	margin: 0 -20px 20px;
+}
+#content .d_contact em {
+	font-size: 20px;/*font.css*/
+	font-weight: bold;
+	font-style: normal;
+	margin: 0!important;
+}
+#content .d_contact p.last-child {
+	display: block;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+/* カテゴリトップのaside
+======================================= */
+#content .aside_top {/*3カラム（デフォルト）*/
+	overflow: hidden;
+}
+#content .aside_top .dSecWrap {/*3カラム（デフォルト）*/
+	overflow: hidden;
+	margin-left: -27px;
+}
+#content .aside_top .dSecWrap.sec2col {/*2カラム*/
+	margin-left: -26px;
+}
+#content .aside_top section {
+	float: left;
+	width: 272px;
+	background-color: #EBF2F8;
+	margin: 0 0 30px 27px;
+	padding: 0 20px 20px 20px;
+	line-height: 1.8;
+	clear: none!important;
+}
+#content .aside_top .sec2col section {
+	width: 315px;
+	margin-left: 26px;
+}
+#content .aside_top h3 {
+	background-color: #CBDCEE;
+	color: #00668D;
+	height: 39px;
+	line-height: 39px;
+	font-size: 16px;/*font.css*/
+	font-family: inherit;
+	margin: 0 -20px 20px;
+	padding-left: 10px;
+}
+#content .aside_top h3 a {
+	color: #00668D;
+	background-image: url(https://www.nihonkiin.or.jp/common/images/arrow_gray.png);
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	padding-left: 13px;
+	text-decoration: none;
+}
+#content .aside_top .h3_def {
+	background-color: transparent;
+	height: auto;
+	line-height: 2;
+	margin: 0 0 2px;
+	padding-left: 0;
+	font-size: 20px;/*font.css*/
+	color: #000;
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝", "MS PMincho", serif;
+}
+#content .aside_top .h3_def a {
+	color: #000;
+	background-image: none;
+	padding-left: 0;
+}
+#content .aside_top .link_list li,
+#content .aside_top .link {
+	background-position: 0 .7em;
+	padding-left: 13px;
+	line-height: 2;
+}
+/*タブパネル　所属別棋士一覧・施設案内（囲碁教室一覧）で使用
+======================================= */
+.tab_list {
+	overflow: hidden;
+	margin: 30px 0 -1px;
+}
+.tab_list + ul {
+	border-top: 1px solid #BCBCBC;
+	padding-top: 30px;
+}
+.tab_list li {
+	float: left;
+	width: 200px;
+	margin-left: 30px;
+}
+.tab_list li a {
+	background: #BCBCBC;
+	border: 1px solid #BCBCBC;
+	color: #000;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	font-size: 16px;/*font.css*/
+	font-weight: bold;
+}
+.tab_list li a:hover {
+	text-decoration: none;
+}
+.tab_list li.current a {
+	color: #F62487;
+	background: #fff;
+	border-bottom-color: #fff;
+}
+.tab_box.kishi02,
+.tab_box.kishi03 {
+	display: none;
+}
+
+
+/* スマホ用 */
+.pc_none {
+	display: none;
+}
+section,
+.mB20 {
+	margin-bottom: 20px;
+}
+/*↑↑↑ここまでPCのみのスタイル*/
+
+
+}
+
+/*↓↓↓PC・すまほ共通スタイル*/
+/* 指導碁のページセルのカラー設定
+http://153.120.14.90/sisetsu/ichigaya/shidogo.html */
+tr.day td,
+tr.day th {
+	background-color: #F7F7F7;
+	text-align: center !important;
+}
+td.holiday,
+td.sun {
+	color: #FA006F;
+}
+th.holiday,
+th.sun,
+td.holiday,
+td.sun {
+	background-color: #FEE6F1;
+	color: #FA006F;
+}
+td.sat,
+th.sat {
+	background-color: #E2ECF9;
+	color: #004FA9;
+}
+tr.week {
+	background-color: #E6E6E6;
+}
+tr.week .sun {
+	background-color: #FED6E8;
+	color: #FA006F;
+}
+tr.week .sat {
+	background-color: #CADDF1;
+	color: #004FA9;
+}
+.holiday {
+	text-align: center;
+}
+
+/*汎用クラス
+======================================= */
+/* 文字 */
+.bold {
+	font-weight: bold!important;
+}
+.large/*,
+.t_large*/ {
+	font-size: larger!important;
+	padding-right: 0!important;
+}
+.small/*,
+.t_small*/ {
+	font-size: smaller!important;
+	padding-right: 0!important;
+}
+/* 文字配置 */
+.t_left {
+	text-align: left!important;
+}
+.t_center {
+	text-align: center!important;
+}
+.t_right {
+	text-align: right!important;
+}
+.v_top {
+	vertical-align: top!important;
+}
+.v_mdl {
+	vertical-align: middle!important;
+}
+.v_btm {
+	vertical-align: baseline!important;
+}
+.v_bottom {
+	vertical-align: bottom!important;
+}
+/* テーブル内文字配置（いらないかも） */
+.t_center td {
+	text-align: center !important;
+}
+.t_right th,
+.t_right td {
+	text-align: right;
+}
+/* 縦書き */
+.tate {
+	text-align: center;
+}
+.tate p {
+	width: 1.1em;
+	margin: 0 auto;
+	white-space: normal;
+}
+/* ボックス配置 */
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.block {
+	display: block;
+}
+.inline_block {
+	display: inline-block;
+}
+.yoko_fit {
+	width: 100% !important;
+	height: inherit !important;
+}
+.tate_fit {
+	width: inherit !important;
+	height: 100% !important;
+}
+/* 背景色・文字色 */
+.bg_blue {	/*グローバルナビ背景の青*/
+	background-color: #0056a2 !important;
+}
+.bg_blue2 {	/*各トップのh3背景の青*/
+	background-color: #cbdcee !important;
+}
+.bg_blue3 {	/*ページタイトル背景の青*/
+	background-color: #ebf2f8 !important;
+}
+.bg_blue4 {	/*サイドナビbox背景の青*/
+	background-color: #eff4fa !important;
+}
+.bg_blue5 {	/*お問い合わせ見出し背景の青*/
+	background-color: #497fbd !important;
+}
+.bg_pink {
+	background-color: #FFF0F0!important;
+}
+.red/*,
+.t_red*/ {
+	color: #f33f27;
+	padding-right: 0!important;
+}
+.pink {
+	color: #f06;
+	padding-right: 0!important;
+}
+/* 数値調整 */
+.pt0 {
+	padding-top: 0 !important;
+}
+.pt34 {
+	padding-top: 34px !important;
+}
+.pb0 {
+	padding-bottom: 0 !important;
+}
+.pr0 {
+	padding-right: 0 !important;
+}
+.pl0 {
+	padding-left: 0 !important;
+}
+.ma0 {
+	margin: 0 !important;
+}
+.mt0 {
+	margin-top: 0 !important;
+}
+.mt1 {
+	margin-top: 1em !important;
+}
+.mt2 {
+	margin-top: 2em !important;
+}
+.mb0 {
+	margin-bottom: 0 !important;
+}
+.mb1 {
+	margin-bottom: 1em !important;
+}
+.mb2 {
+	margin-bottom: 2em !important;
+}
+.mb_4px {
+	margin-bottom: -4px !important;
+}
+.mb_7px {
+	margin-bottom: -7px !important;
+}
+.mb20 {
+	margin-bottom: 20px;
+}
+.mb25px {
+	margin-bottom: 25px;
+}
+.mb30px {
+	margin-bottom: 30px;
+}
+.ml12px {
+	margin-left: 12px !important;
+}
+.ml25px {
+	margin-left: 25px !important;
+}
+.ml26px {
+	margin-left: 26px !important;
+}
+.mr32px {
+	margin-right: 32px !important;
+}
+.w100 {
+	width: 100% !important;
+}
+.w50px {
+	width: 50px !important;
+}
+.w80px {
+	width: 80px !important;
+}
+.w164px {
+	width: 164px !important;
+}
+.w434px {
+	width: 435px !important;
+}
+.h192px {
+	height: 192px !important;
+}
+.mL20 {
+	margin-left: 20px;
+}
+.mR20 {
+	margin-right: 20px;
+}
+.line_h100 {
+	line-height: 100%;
+}
+.line_h120 {
+	line-height: 120%;
+}
+.line_h150 {
+	line-height: 150%;
+}
+/* その他 */
+hr {
+	border: none;
+	border-top: dotted #888 1px;
+}
+img.border {
+	border: solid #D1DCE8 1px;
+}
+.no_border {
+	border: none !important;
+}
+/* 明朝フォント仮追加 */
+#content h4,
+.h_list,
+.dl_def dt,
+.dl_flo dt,
+#content .aside_top .h3_def {
+	font-family: "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", "游明朝", YuMincho, "メイリオ", Meiryo, serif;
+}
+
+/*　6か月用タブ */
+.tab_list_6 {
+	overflow: hidden;
+	margin: 30px 0 -1px;
+}
+.tab_list_6 + ul {
+	border-top: 1px solid #BCBCBC;
+	padding-top: 30px;
+}
+.tab_list_6 li {
+	float: left;
+	width: 85px;
+	margin-left: 30px;
+}
+.tab_list_6 li a {
+	background: #BCBCBC;
+	border: 1px solid #BCBCBC;
+	color: #000;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	font-size: 16px;/*font.css*/
+	font-weight: bold;
+}
+.tab_list_6 li a:hover {
+	text-decoration: none;
+}
+.tab_list_6 li.current a {
+	color: #F62487;
+	background: #fff;
+	border-bottom-color: #fff;
+}
+.tab_box_6.kishi02,
+.tab_box_6.kishi03,
+.tab_box_6.kishi04,
+.tab_box_6.kishi05,
+.tab_box_6.kishi06 {
+	display: none;
+}
+
+/* 12ヶ月用タブ */
+.bg_yellow { background:#FFFFCC;}
+
+
+.tab_list_12 {
+	overflow: hidden;
+	margin: 30px 0 -1px;
+}
+.tab_list_12 + ul {
+	border-top: 1px solid #BCBCBC;
+	padding-top: 30px;
+}
+.tab_list_12 li {
+	float: left;
+	width: 50px;
+	margin-left: 10px;
+}
+.tab_list_12 li a {
+	background: #BCBCBC;
+	border: 1px solid #BCBCBC;
+	color: #000;
+	line-height: 30px;
+	text-align: center;
+	display: block;
+	font-size: 14px;/*font.css*/
+	font-weight: bold;
+}
+.tab_list_12 li a:hover {
+	text-decoration: none;
+}
+.tab_list_12 li.current a {
+	color: #F62487;
+	background: #fff;
+	border-bottom-color: #fff;
+}
+.tab_box_12.kishi02,
+.tab_box_12.kishi03,
+.tab_box_12.kishi04,
+.tab_box_12.kishi05,
+.tab_box_12.kishi06,
+.tab_box_12.kishi07,
+.tab_box_12.kishi08,
+.tab_box_12.kishi09,
+.tab_box_12.kishi10,
+.tab_box_12.kishi11,
+.tab_box_12.kishi12 {
+	display: none;
+}
+
+.box_red { border:solid 1px #cc0033; background:#ffcccc; padding:10px}
+.box_title_red { color: #cc0033; font-weight:bold}
+
+.box_bule { border:solid 1px #497fbd; background:#ebf2f8; padding:10px}
+.box_title_bule { color: #497fbd; font-weight:bold}
+
+.box_green { border:solid 1px #63ae3e; background:#def7d2; padding:10px}
+.box_title_green { color: #63ae3e; font-weight:bold}
+
+.box_pink { border:solid 1px #ed3f89; background:#fcdbeb; padding:10px}
+.box_title_pink { color: #ed3f89; font-weight:bold}
+
+.box_orange { border:solid 1px #ff9933; background:#fcf8df; padding:10px}
+.box_title_orange { color: #ff9933; font-weight:bold}
+
+.box_gray { border:solid 1px #666666; background:#F5F5F5; padding:10px}
+.box_title_gray { color: #666666; font-weight:bold}
