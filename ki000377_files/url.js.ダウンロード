@@ -1,4 +1,0 @@
-function setStartPage(url) {
- document.body.style.behavior  = "url('#default#homepage')";
- document.body.setHomePage(url);
-}
